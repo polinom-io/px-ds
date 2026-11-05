@@ -1,0 +1,23 @@
+{
+  "$description": "Colour pairs that must meet a contrast minimum in every theme (spec §6, WCAG 2.2 AA). Checked by tools/contrast-check.mjs; a failure fails the build. Each rule checks every fg against every bg. Exempt by design: color-text-disabled, color-border-subtle (decorative), color-brand-* (decoration only), color-scrim.",
+  "surfaces": ["color-surface-page", "color-surface-sunken", "color-surface-default", "color-surface-raised", "color-surface-overlay"],
+  "rules": [
+    { "why": "Body, headings and secondary text on every surface except inverse (1.4.3)", "min": 4.5, "fg": ["color-text-default", "color-text-muted"], "bg": "surfaces" },
+    { "why": "Text on the inverse surface (tooltips, inverse bands)", "min": 4.5, "fg": ["color-text-inverse"], "bg": ["color-surface-inverse"] },
+    { "why": "Links and their hover state on every surface", "min": 4.5, "fg": ["color-text-link", "color-text-link-hover"], "bg": "surfaces" },
+    { "why": "Primary button label", "min": 4.5, "fg": ["color-action-primary-fg"], "bg": ["color-action-primary-bg"] },
+    { "why": "Secondary button label, at rest and on hover", "min": 4.5, "fg": ["color-action-secondary-fg"], "bg": ["color-action-secondary-bg", "color-action-secondary-bg-hover"] },
+    { "why": "Ghost button label on surfaces", "min": 4.5, "fg": ["color-action-secondary-fg"], "bg": "surfaces" },
+    { "why": "Destructive button label", "min": 4.5, "fg": ["color-action-destructive-fg"], "bg": ["color-action-destructive-bg"] },
+    { "why": "Tones are text-safe on every surface (Card exponent, Badge soft and outline, Progress)", "min": 4.5, "fg": ["color-accent-primary", "color-accent-secondary", "color-accent-tertiary", "color-accent-quaternary"], "bg": "surfaces" },
+    { "why": "Badge solid and Avatar: page colour as text on a tone fill", "min": 4.5, "fg": ["color-surface-page"], "bg": ["color-accent-primary", "color-accent-secondary", "color-accent-tertiary", "color-accent-quaternary"] },
+    { "why": "Status text and icons on their own fill", "min": 4.5, "fg": ["color-feedback-success-fg"], "bg": ["color-feedback-success-bg"] },
+    { "why": "Status text and icons on their own fill", "min": 4.5, "fg": ["color-feedback-warning-fg"], "bg": ["color-feedback-warning-bg"] },
+    { "why": "Status text and icons on their own fill", "min": 4.5, "fg": ["color-feedback-danger-fg"], "bg": ["color-feedback-danger-bg"] },
+    { "why": "Status text and icons on their own fill", "min": 4.5, "fg": ["color-feedback-info-fg"], "bg": ["color-feedback-info-bg"] },
+    { "why": "Status text and icons on any page surface", "min": 4.5, "fg": ["color-feedback-success-fg", "color-feedback-warning-fg", "color-feedback-danger-fg", "color-feedback-info-fg"], "bg": "surfaces" },
+    { "why": "Control outlines: inputs, checkbox, radio, switch track (1.4.11)", "min": 3, "fg": ["color-border-control", "color-border-strong"], "bg": ["color-surface-page", "color-surface-default"] },
+    { "why": "Focus ring on every surface (2.4.13, 1.4.11)", "min": 3, "fg": ["color-focus-ring"], "bg": "surfaces" },
+    { "why": "Checked switch track and checkbox fill against the page (1.4.11)", "min": 3, "fg": ["color-action-primary-bg"], "bg": ["color-surface-page", "color-surface-default"] }
+  ]
+}
