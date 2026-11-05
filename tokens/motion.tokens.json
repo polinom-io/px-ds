@@ -1,0 +1,40 @@
+{
+  "$description": "Polinom Design System motion tokens (FND-08). DTCG format. Sidecar to the design system's tokens.json, which has no motion category; the token build merges both. Shared by both themes and modes (spec §2.2: themes differ in colour only). Values moved from the design system README 'Motion' guidance, 5 Nov 2026.",
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "fast": {
+        "$value": { "value": 120, "unit": "ms" },
+        "$description": "Hover and press state changes."
+      },
+      "medium": {
+        "$value": { "value": 200, "unit": "ms" },
+        "$description": "Small enter/exit: Menu, Popover, Tooltip, Toast."
+      },
+      "slow": {
+        "$value": { "value": 280, "unit": "ms" },
+        "$description": "Large surfaces: Modal, Drawer / Sheet."
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "enter": {
+        "$value": [0.2, 0, 0, 1],
+        "$description": "Ease out. Elements entering or expanding."
+      },
+      "exit": {
+        "$value": [0.4, 0, 1, 1],
+        "$description": "Ease in. Elements leaving or collapsing."
+      }
+    },
+    "reduced": {
+      "$description": "Behaviour under prefers-reduced-motion (Web), MediaQuery.disableAnimations (Flutter), accessibilityReduceMotion (SwiftUI), animator duration scale 0 / reduce-motion setting (Compose). Not a value token; each platform applies the rule in its motion helper.",
+      "$extensions": {
+        "io.polinom.motion": {
+          "movement": "replace with opacity fade",
+          "skeleton": "static (no shimmer)"
+        }
+      }
+    }
+  }
+}

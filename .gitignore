@@ -1,0 +1,137 @@
+# px-ds: Polinom.io Design System monorepo
+# Generated token files (packages/*/…/tokens.*) are COMMITTED on purpose: CI runs
+# `node tools/build.mjs --check` to make sure they match tokens/. Do not ignore them here.
+
+# ── macOS ──────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# ── Editors and IDEs ───────────────────────────────────
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*~
+
+# ── Environment and secrets ────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+# npm/pnpm credentials belong in ~/.npmrc or CI secrets, never in a repo file
+.npmrc.local
+
+# ── Node, pnpm (tools/, packages/web, apps/astro-playground) ──
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm/
+*.tsbuildinfo
+.eslintcache
+.cache/
+coverage/
+
+# Build output
+dist/
+packages/web/lib/
+
+# ── Astro ──────────────────────────────────────────────
+.astro/
+.vercel/
+.netlify/
+
+# ── Playwright and visual regression ───────────────────
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+# Screenshot diffs from failed runs (the approved baselines are committed)
+**/__diff_output__/
+**/*-diff.png
+**/*-actual.png
+
+# ── Flutter / Dart (packages/flutter, apps/flutter-gallery) ──
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+# A library does not commit its lockfile; the gallery app does
+packages/flutter/pubspec.lock
+# Golden test failures (the approved goldens are committed)
+**/test/**/failures/
+
+# Flutter-generated platform files in the gallery app
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/ephemeral/
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/macos/Flutter/ephemeral/
+**/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+
+# ── iOS, Xcode, Swift Package Manager (packages/ios, Phase 2) ──
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+.build/
+.swiftpm/
+# (No "Packages/" rule: on macOS, where git ignores letter case, it would also hide our packages/ folder.)
+Package.resolved
+Pods/
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# ── Android, Gradle, Kotlin (packages/android, Phase 2) ──
+.gradle/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+.kotlin/
+# Signing material stays out of the repo
+*.jks
+*.keystore
+!debug.keystore
+
+# ── Logs and temporary files ───────────────────────────
+*.log
+tmp/
+.tmp/
