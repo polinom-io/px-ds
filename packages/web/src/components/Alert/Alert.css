@@ -1,0 +1,12 @@
+/* Alert: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-alert { display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); padding: var(--space-4); border-radius: var(--radius-md); color: var(--color-text-default); }
+.px-alert__title { margin: 0; font: var(--text-title-sm); }
+.px-alert__body { margin-top: var(--space-1); font: var(--text-body-sm); }
+.px-alert--info    { background: var(--color-feedback-info-bg); }
+.px-alert--info    .px-alert__icon, .px-alert--info    .px-alert__title { color: var(--color-feedback-info-fg); }
+.px-alert--success { background: var(--color-feedback-success-bg); }
+.px-alert--success .px-alert__icon, .px-alert--success .px-alert__title { color: var(--color-feedback-success-fg); }
+.px-alert--warning { background: var(--color-feedback-warning-bg); }
+.px-alert--warning .px-alert__icon, .px-alert--warning .px-alert__title { color: var(--color-feedback-warning-fg); }
+.px-alert--danger  { background: var(--color-feedback-danger-bg); }
+.px-alert--danger  .px-alert__icon, .px-alert--danger  .px-alert__title { color: var(--color-feedback-danger-fg); }

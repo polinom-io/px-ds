@@ -1,0 +1,11 @@
+/* Modal: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-modal {
+  width: min(560px, calc(100vw - 2 * var(--space-4))); padding: 0; border: var(--border-width-hairline) solid var(--color-border-subtle);
+  border-radius: var(--radius-xl); background: var(--color-surface-overlay); color: var(--color-text-default); box-shadow: var(--shadow-4);
+}
+.px-modal::backdrop { background: var(--color-scrim); }
+.px-modal__head, .px-modal__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) var(--space-6); }
+.px-modal__head { border-bottom: var(--border-width-hairline) solid var(--color-border-subtle); }
+.px-modal__foot { border-top: var(--border-width-hairline) solid var(--color-border-subtle); justify-content: flex-end; }
+.px-modal__title { margin: 0; font: var(--text-title-md); }
+.px-modal__body { padding: var(--space-6); font: var(--text-body-md); }
