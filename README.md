@@ -2,7 +2,7 @@
 
 One design system for two brands, **Polinom.io** and **TreatMint**, in light and dark mode, on the web (React, used from Astro) and Flutter, with native iOS and Android to follow.
 
-> **Status: Phase 1, in build.** Nothing is published yet. This repository holds the design tokens, the build that turns them into platform files, and the fonts. Components arrive next: React first, then Flutter.
+> **Status: Phase 1, in build.** Nothing is published yet. This repository holds the design tokens, the build that turns them into platform files, the fonts, and the React components (`packages/web`, in build). Flutter widgets come next.
 
 ## What's here
 
@@ -14,12 +14,12 @@ px-ds/
 │   └── contrast-pairs.json  colour pairs that must meet WCAG 2.2 AA
 ├── tools/                   token build: Node, no dependencies
 ├── packages/
-│   ├── web/                 src/tokens/tokens.css (generated)
+│   ├── web/                 @polinom-io/px-ds-react: 14 React components, src/tokens/tokens.css (generated)
 │   └── flutter/             lib/src/tokens/tokens.g.dart (generated)
 └── assets/fonts/            Atkinson Hyperlegible Next, Hack (woff2 + ttf) and their licences
 ```
 
-Planned next: the React components in `packages/web`, Flutter widgets in `packages/flutter`, an Astro playground and a Flutter gallery under `apps/`, and the CI workflow. iOS and Android come in Phase 2.
+Planned next: Flutter widgets in `packages/flutter`, an Astro playground and a Flutter gallery under `apps/`. iOS and Android come in Phase 2.
 
 ## Quick start
 
@@ -97,12 +97,13 @@ The Dart file has been checked value by value against the tokens but not yet com
 | iOS (Phase 2) | `PxDS` | a release tag of this repo (Swift Package Manager) |
 | Android (Phase 2) | `io.polinom:px-ds-compose` | GitHub Packages (Maven) |
 
-All packages are public and released together under one version. Installing from GitHub Packages needs a token even for public packages; the `.npmrc` here reads it from `NODE_AUTH_TOKEN`. A site that uses the web package needs the same two lines in its own `.npmrc`:
+All packages are public and released together under one version. A site that uses the web package adds the registry to its project `.npmrc`:
 
 ```ini
 @polinom-io:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
+
+GitHub Packages needs a token to install, even for public packages. It goes in each developer's `~/.npmrc` (`//npm.pkg.github.com/:_authToken=<token with read:packages>`) or comes from CI; pnpm 12 ignores credentials in a project's own `.npmrc`. See [packages/web/README.md](packages/web/README.md).
 
 ## Accessibility
 
