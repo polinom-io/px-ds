@@ -1,0 +1,11 @@
+/* Tabs: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-tabs { display: grid; }
+.px-tabs__list { display: flex; gap: var(--space-1); border-bottom: var(--border-width-hairline) solid var(--color-border-subtle); overflow-x: auto; }
+.px-tabs__tab {
+  font: var(--text-label-md); color: var(--color-text-muted); background: transparent; border: 0;
+  border-bottom: var(--border-width-thick) solid transparent; margin-bottom: -1px;
+  min-height: var(--size-control-md); padding: 0 var(--space-4); cursor: pointer;
+}
+.px-tabs__tab:hover { color: var(--color-text-default); }
+.px-tabs__tab[aria-selected="true"] { color: var(--color-text-default); border-bottom-color: var(--color-text-link); }
+.px-tabs__panel { padding: var(--space-4) 0; font: var(--text-body-md); color: var(--color-text-default); }

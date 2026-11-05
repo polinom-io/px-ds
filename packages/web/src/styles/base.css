@@ -1,0 +1,16 @@
+/* Shared: icon sizing, the focus ring for every interactive part, icon button, reduced motion. Values come from tokens.css only. */
+.px-icon { flex: none; }
+.px-btn:focus-visible, .px-iconbtn:focus-visible, .px-field__control:focus-visible,
+.px-check__input:focus-visible, .px-switch__input:focus-visible + .px-switch__track,
+.px-tabs__tab:focus-visible, .px-tabs__panel:focus-visible, .px-table-wrap:focus-visible {
+  outline: var(--border-width-focus) solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.px-iconbtn {
+  display: inline-grid; place-items: center; width: var(--size-control-md); height: var(--size-control-md);
+  border: 0; border-radius: var(--radius-md); background: transparent; color: var(--color-text-muted); cursor: pointer;
+}
+.px-iconbtn:hover { background: var(--color-action-secondary-bg-hover); color: var(--color-text-default); }
+@media (prefers-reduced-motion: reduce) {
+  .px-btn, .px-switch__track, .px-switch__thumb { transition: none; }
+}
