@@ -1,0 +1,4 @@
+/* Stat: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-stat { display: grid; gap: var(--space-1); }
+.px-stat__figure { font: var(--text-display-md); letter-spacing: var(--text-display-md-tracking); color: var(--color-text-link); }
+.px-stat__label { font: var(--text-body-sm); color: var(--color-text-muted); }

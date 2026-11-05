@@ -40,3 +40,24 @@ jobs:
           node tools/build.mjs --check | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
+
+  web:
+    name: Web package (typecheck, test, build)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      # Installs the pnpm version named in package.json "packageManager".
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @polinom-io/px-ds-react typecheck
+      # Server render with no DOM, hydration as separate islands, axe-core, behaviour, stylesheet checks.
+      - run: pnpm --filter @polinom-io/px-ds-react test
+      - run: pnpm --filter @polinom-io/px-ds-react build

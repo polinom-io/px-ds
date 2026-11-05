@@ -1,0 +1,5 @@
+/* Avatar: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-avatar { display: inline-grid; place-items: center; border-radius: var(--radius-full); background: var(--px-tone); color: var(--color-surface-page); font: var(--text-label-md); text-transform: uppercase; }
+.px-avatar--sm { width: 24px; height: 24px; font: var(--text-label-sm); }
+.px-avatar--md { width: 32px; height: 32px; }
+.px-avatar--lg { width: 40px; height: 40px; }

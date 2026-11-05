@@ -1,0 +1,12 @@
+/* Switch: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-switch { display: inline-flex; gap: var(--space-3); align-items: center; font: var(--text-body-md); color: var(--color-text-default); min-height: var(--size-touch-min); cursor: pointer; position: relative; }
+.px-switch__input { position: absolute; opacity: 0; width: 44px; height: 24px; margin: 0; cursor: pointer; }
+.px-switch__track {
+  width: 44px; height: 24px; flex: none; border-radius: var(--radius-full); box-sizing: border-box;
+  background: var(--color-surface-sunken); border: var(--border-width-hairline) solid var(--color-border-control);
+  position: relative; transition: background-color var(--motion-duration-fast) var(--motion-easing-enter);
+}
+.px-switch__thumb { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: var(--radius-full); background: var(--color-border-control); transition: transform var(--motion-duration-fast) var(--motion-easing-enter); }
+.px-switch__input:checked + .px-switch__track { background: var(--color-action-primary-bg); border-color: var(--color-action-primary-bg); }
+.px-switch__input:checked + .px-switch__track .px-switch__thumb { transform: translateX(20px); background: var(--color-action-primary-fg); }
+.px-switch__input:disabled + .px-switch__track { opacity: var(--opacity-disabled); }

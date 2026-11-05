@@ -1,0 +1,3 @@
+/* Checkbox: every value is a token from tokens.css; nothing here is theme-specific. */
+.px-check { display: inline-flex; gap: var(--space-2); align-items: center; font: var(--text-body-md); color: var(--color-text-default); min-height: var(--size-touch-min); cursor: pointer; }
+.px-check__input { width: 20px; height: 20px; margin: 0; accent-color: var(--color-action-primary-bg); }
