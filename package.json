@@ -1,0 +1,21 @@
+{
+  "name": "px-ds",
+  "private": true,
+  "description": "Polinom.io Design System: tokens, build tools and platform packages",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polinom-io/px-ds.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@12.15.0",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node tools/build.mjs --check",
+    "contrast": "node tools/contrast-check.mjs tokens/tokens.json tokens/contrast-pairs.json",
+    "cvd": "node tools/cvd-check.mjs tokens/tokens.json"
+  }
+}

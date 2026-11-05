@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tokens:
+    name: Tokens (build, verify, contrast)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          # The token build has no dependencies. Without this, setup-node sees "packageManager" in
+          # package.json and tries to cache pnpm's store, which fails because pnpm is not installed.
+          package-manager-cache: false
+
+      # Regenerates every platform file in memory and fails if a committed generated file differs
+      # from tokens/, if a token is missing a theme value, has a broken alias or a bad name, or if a
+      # pair in tokens/contrast-pairs.json is under its WCAG minimum. The CVD report is informational.
+      - name: Token build check
+        run: |
+          {
+            echo '### Token build'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          status=0
+          node tools/build.mjs --check | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
