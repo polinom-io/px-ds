@@ -1,0 +1,5 @@
+# Workspace packages. Folders without a package.json are skipped, so this is ready for the
+# web package and the Astro playground before they exist.
+packages:
+  - packages/*
+  - apps/*
