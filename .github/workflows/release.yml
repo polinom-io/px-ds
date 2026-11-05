@@ -1,0 +1,105 @@
+name: Release
+
+# Publishes @polinom-io/px-ds-react to GitHub Packages and creates a GitHub release.
+#
+#   Release:  bump "version" in packages/web/package.json in a pull request, merge it, then
+#             tag main with the same version:  git tag v0.1.0 && git push origin v0.1.0
+#   Dry run:  every pull request that touches the package or this workflow runs everything
+#             except the publish and the release, and shows what would be published.
+#
+# One version for every package (spec: lockstep releases). Tags with a hyphen (v0.2.0-rc.1)
+# publish under the npm dist-tag "next" and are marked as pre-releases.
+
+on:
+  push:
+    tags: ['v*.*.*']
+  pull_request:
+    paths:
+      - 'packages/web/**'
+      - 'tokens/**'
+      - 'tools/**'
+      - 'assets/fonts/**'
+      - '.github/workflows/release.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  web:
+    name: Publish @polinom-io/px-ds-react
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write   # create the GitHub release
+      packages: write   # publish to GitHub Packages
+    env:
+      DRY_RUN: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # needed to confirm the tag is on main
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Check the tag matches the package version and is on main
+        if: env.DRY_RUN == 'false'
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(node -p "require('./packages/web/package.json').version")"
+          if [ "$tag" != "$version" ]; then
+            echo "::error::Tag v$tag does not match packages/web/package.json version $version. Bump the version in a pull request first."
+            exit 1
+          fi
+          git fetch --quiet origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::Tag v$tag points to a commit that is not on main. Tag a commit on main."
+            exit 1
+          fi
+
+      - run: pnpm install --frozen-lockfile
+
+      # The same gates as CI, so nothing reaches the registry that main would reject.
+      - name: Token build check
+        run: node tools/build.mjs --check
+      - run: pnpm --filter @polinom-io/px-ds-react typecheck
+      - run: pnpm --filter @polinom-io/px-ds-react test
+      - run: pnpm --filter @polinom-io/px-ds-react build
+
+      - name: Show what would be published
+        working-directory: packages/web
+        run: |
+          pnpm pack --pack-destination "$RUNNER_TEMP"
+          {
+            echo "### Package contents"
+            echo '```'
+            tar -tzf "$RUNNER_TEMP"/polinom-io-px-ds-react-*.tgz | sed 's|^package/||' | sort
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish to GitHub Packages
+        if: env.DRY_RUN == 'false'
+        working-directory: packages/web
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # pnpm 12 reads credentials only from the user config, never from the repository's .npmrc.
+          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          case "$GITHUB_REF_NAME" in *-*) dist_tag=next ;; *) dist_tag=latest ;; esac
+          pnpm publish --no-git-checks --access public --tag "$dist_tag"
+
+      - name: Create the GitHub release
+        if: env.DRY_RUN == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          case "$GITHUB_REF_NAME" in *-*) pre=--prerelease ;; *) pre= ;; esac
+          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes --verify-tag $pre
