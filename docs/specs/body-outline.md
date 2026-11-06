@@ -1,6 +1,6 @@
 # Body outline  (`INP-19`)
 
-> Component spec, platform-neutral. References like §2.1 point to the design system specification, which stays outside the repo until Phase 1 is `Stable`; this file is the source for this component.
+> Component spec, platform-neutral. References like §2.1 point to the design system specification, [`docs/spec.md`](../spec.md).
 
 **Status:** Design ☐ · Docs ☐     **Owner:** core team (spec), Flutter platform lead (build)     **Version:** 0.1.0 (draft, 6 Nov 2026)
 
