@@ -61,3 +61,25 @@ jobs:
       # Server render with no DOM, hydration as separate islands, axe-core, behaviour, stylesheet checks.
       - run: pnpm --filter @polinom-io/px-ds-react test
       - run: pnpm --filter @polinom-io/px-ds-react build
+
+  flutter:
+    name: Flutter package (analyze, test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: packages/flutter
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.9
+          cache: true
+
+      - run: flutter --version
+      - run: flutter pub get
+      # The first real compile of the generated tokens.g.dart.
+      - run: flutter analyze
+      - run: flutter test
