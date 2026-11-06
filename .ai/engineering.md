@@ -1,4 +1,4 @@
-<!-- px-context v0.2.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v0.3.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -11,12 +11,14 @@
 
 ## Releases
 - `release-please` opens a release PR with version bump and CHANGELOG; merging it tags and publishes.
-- npm: `npm publish --provenance` from GitHub Actions only, never from a laptop.
+- Packages: publish to **GitHub Packages** under the `@polinom-io` scope (`https://npm.pkg.github.com`), from GitHub Actions only, never from a laptop. Never publish to npmjs.org, and never create new `@polinom.io` packages.
+- Consumers map the scope once in `~/.npmrc`: `@polinom-io:registry=https://npm.pkg.github.com` plus `//npm.pkg.github.com/:_authToken=<token with read:packages>`. Never commit the token.
+- Legacy: `@polinom.io/*` on npmjs.org is frozen. When one of those packages next changes, republish it as `@polinom-io/<name>` on GitHub Packages and `npm deprecate` the old one.
 
 ## CI/CD
 - GitHub Actions only. Secrets in org/repo secrets, never in workflow files.
 - Cloud deploys use OIDC (`id-token: write`), not long-lived keys.
 
 ## Code style
-- Lint/format with `@polinom.io/eslint-config` and `@polinom.io/prettier-config`; don't restate their rules.
+- Lint/format with the shared configs (today the legacy `@polinom.io/eslint-config` and `@polinom.io/prettier-config`; `@polinom-io/*` once republished); don't restate their rules.
 - Tests and fixtures use synthetic data only.
