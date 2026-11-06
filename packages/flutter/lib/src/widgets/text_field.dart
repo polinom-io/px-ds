@@ -1,3 +1,5 @@
+import 'dart:ui' show SemanticsValidationResult;
+
 import 'package:flutter/material.dart';
 
 import '../icons/icons.g.dart';
@@ -74,50 +76,61 @@ class PxDsTextField extends StatelessWidget {
           ])),
         ),
         const SizedBox(height: PxDsTokens.space2),
-        // One node for screen readers: label, "required", value, helper or error.
+        // One node for screen readers: label, "required", value, helper or error, and an
+        // "invalid" state when there is an error. Helper and error are drawn here rather than by
+        // InputDecoration, so they line up with the label instead of being indented.
         MergeSemantics(
-          child: Semantics(
-          label: required ? '$label, required' : label,
-          child: TextField(
-            controller: controller,
-            enabled: enabled,
-            obscureText: obscureText,
-            keyboardType: keyboardType,
-            textInputAction: textInputAction,
-            autofillHints: autofillHints,
-            maxLines: obscureText ? 1 : maxLines,
-            onChanged: onChanged,
-            onSubmitted: onSubmitted,
-            style: t.textBodyMd.copyWith(color: c.colorTextDefault),
-            cursorColor: c.colorTextDefault,
-            decoration: InputDecoration(
-              isDense: true,
-              filled: true,
-              fillColor: c.colorSurfaceDefault,
-              hintText: placeholder,
-              hintStyle: t.textBodyMd.copyWith(color: c.colorTextMuted),
-              contentPadding: const EdgeInsets.symmetric(horizontal: PxDsTokens.space3, vertical: PxDsTokens.space3),
-              constraints: const BoxConstraints(minHeight: PxDsTokens.sizeControlLg),
-              enabledBorder: rest,
-              disabledBorder: border(c.colorBorderSubtle, PxDsTokens.borderWidthHairline),
-              focusedBorder: hasError ? rest : border(c.colorFocusRing, PxDsTokens.borderWidthFocus),
-              errorBorder: rest,
-              focusedErrorBorder: rest,
-              border: rest,
-              helperText: hasError ? null : helper,
-              helperStyle: messageStyle,
-              helperMaxLines: 3,
-              error: hasError
-                  ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 1, right: PxDsTokens.space1),
-                        child: PxDsIcon(PxDsIcons.xCircle, size: PxDsTokens.sizeIconSm, color: c.colorFeedbackDangerFg),
-                      ),
-                      Expanded(child: Text(error!, style: messageStyle)),
-                    ])
-                  : null,
-            ),
-          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Semantics(
+                label: required ? '$label, required' : label,
+                validationResult: hasError ? SemanticsValidationResult.invalid : SemanticsValidationResult.none,
+                child: TextField(
+                  controller: controller,
+                  enabled: enabled,
+                  obscureText: obscureText,
+                  keyboardType: keyboardType,
+                  textInputAction: textInputAction,
+                  autofillHints: autofillHints,
+                  maxLines: obscureText ? 1 : maxLines,
+                  onChanged: onChanged,
+                  onSubmitted: onSubmitted,
+                  style: t.textBodyMd.copyWith(color: c.colorTextDefault),
+                  cursorColor: c.colorTextDefault,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    filled: true,
+                    fillColor: c.colorSurfaceDefault,
+                    hintText: placeholder,
+                    hintStyle: t.textBodyMd.copyWith(color: c.colorTextMuted),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: PxDsTokens.space3, vertical: PxDsTokens.space3),
+                    constraints: const BoxConstraints(minHeight: PxDsTokens.sizeControlLg),
+                    enabledBorder: rest,
+                    disabledBorder: border(c.colorBorderSubtle, PxDsTokens.borderWidthHairline),
+                    focusedBorder: hasError ? rest : border(c.colorFocusRing, PxDsTokens.borderWidthFocus),
+                    border: rest,
+                  ),
+                ),
+              ),
+              if (hasError)
+                Padding(
+                  padding: const EdgeInsets.only(top: PxDsTokens.space2),
+                  child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 1, right: PxDsTokens.space1),
+                      child: PxDsIcon(PxDsIcons.xCircle, size: PxDsTokens.sizeIconSm, color: c.colorFeedbackDangerFg),
+                    ),
+                    Expanded(child: Text(error!, style: messageStyle)),
+                  ]),
+                )
+              else if (helper != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: PxDsTokens.space2),
+                  child: Text(helper!, style: messageStyle),
+                ),
+            ],
           ),
         ),
       ],

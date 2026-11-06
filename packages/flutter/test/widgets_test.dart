@@ -1,3 +1,5 @@
+import 'dart:ui' show SemanticsValidationResult;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:px_ds/px_ds.dart';
@@ -55,8 +57,19 @@ void main() {
       final node = tester.getSemantics(find.byType(TextField));
       expect(node.getSemanticsData().label, contains('Email, required'));
       expect(node, isSemantics(isTextField: true));
+      expect(node, isSemantics(validationResult: SemanticsValidationResult.invalid));
+      expect(node.getSemanticsData().label, contains('Enter a valid email address.'));
       expect(find.text('Enter a valid email address.'), findsOneWidget);
       expect(find.byType(PxDsIcon), findsOneWidget); // the error has an icon, not colour alone
+      handle.dispose();
+    });
+
+    testWidgets('a field without an error is not marked invalid, and reads its helper', (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(themed(const PxDsTextField(label: 'Name', helper: 'As on your ID')));
+      final node = tester.getSemantics(find.byType(TextField));
+      expect(node, isSemantics(validationResult: SemanticsValidationResult.none));
+      expect(node.getSemanticsData().label, contains('As on your ID'));
       handle.dispose();
     });
 
@@ -64,7 +77,7 @@ void main() {
       await tester.pumpWidget(themed(const PxDsTextField(label: 'Name', helper: 'As on your ID')));
       expect(find.text('As on your ID'), findsOneWidget);
       await tester.pumpWidget(themed(const PxDsTextField(label: 'Name', helper: 'As on your ID', error: 'Required')));
-      await tester.pumpAndSettle(); // the helper fades out before it leaves the tree
+      await tester.pumpAndSettle();
       expect(find.text('As on your ID'), findsNothing);
       expect(find.text('Required'), findsOneWidget);
     });
