@@ -5,7 +5,7 @@
 //   node tools/build.mjs --check    write nothing; fail if a generated file differs from what is committed
 //
 // Paths follow the repo layout (polinom-io/px-ds). Override any of them with --tokens, --motion,
-// --pairs, --css, --dart, --fonts or --flutter-fonts, e.g. --tokens path/to/tokens.json.
+// --pairs, --css, --dart, --fonts, --flutter-fonts, --icons or --dart-icons, e.g. --tokens path/to/tokens.json.
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { buildWebCss } from './build-web-css.mjs';
@@ -14,6 +14,7 @@ import { verifyWebCss } from './verify-web-css.mjs';
 import { verifyDart } from './verify-dart.mjs';
 import { cvdCheck, band } from './cvd-check.mjs';
 import { contrastCheck } from './contrast-check.mjs';
+import { parseIcons, buildDartIcons } from './icons.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : fallback; };
@@ -26,6 +27,8 @@ const paths = {
   dart: opt('dart', 'packages/flutter/lib/src/tokens/tokens.g.dart'),
   fonts: opt('fonts', 'assets/fonts'),
   flutterFonts: opt('flutter-fonts', 'packages/flutter/assets/fonts'),
+  icons: opt('icons', 'assets/icons'),
+  dartIcons: opt('dart-icons', 'packages/flutter/lib/src/icons/icons.g.dart'),
 };
 
 const failures = [];
@@ -82,6 +85,10 @@ step('Flutter fonts (ttf + licences)', () => {
   if (stale.length) throw new Error(`${paths.flutterFonts} has files not in ${paths.fonts}: ${stale.join(', ')}`);
   return `${files.length} files ${check ? 'up to date' : `copied to ${paths.flutterFonts}`}`;
 });
-// Still to add (spec §12): icon generation, Swift and Kotlin exports.
+step('icons → Dart (Phosphor 2.1.1)', () => {
+  const icons = parseIcons(paths.icons);
+  return `${icons.length} icons; ${emit(paths.dartIcons, buildDartIcons(icons))}`;
+});
+// Still to add (spec §12): web icons from the same SVGs, Swift and Kotlin exports.
 
 if (failures.length) { console.log(`\n${failures.length} step(s) failed: ${failures.join(', ')}`); process.exit(1); }
