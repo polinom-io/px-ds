@@ -1,6 +1,6 @@
 {
   "name": "@polinom-io/px-ds-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Polinom.io Design System: React components and design tokens for the web (Astro-safe)",
   "license": "MIT",
   "type": "module",
