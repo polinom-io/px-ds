@@ -1,0 +1,8 @@
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+  errors:
+    # Generated code is one long line per theme; it is checked by tools/verify-dart.mjs instead.
+    lines_longer_than_80_chars: ignore
