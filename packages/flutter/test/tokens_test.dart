@@ -36,7 +36,12 @@ void main() {
       expect(a.lerp(b, 0).colorSurfacePage, a.colorSurfacePage);
       expect(a.lerp(b, 1).colorSurfacePage, b.colorSurfacePage);
       expect(a.lerp(null, 0.5), same(a));
-      expect(PxDsElevation.pxLight.lerp(PxDsElevation.pxDark, 1).shadow4, PxDsElevation.pxDark.shadow4);
+      // Same number of layers: lerp lands exactly on the other end.
+      expect(PxDsElevation.pxLight.lerp(PxDsElevation.pxDark, 1).shadow1, PxDsElevation.pxDark.shadow1);
+      // Light shadow4 has two layers, dark one: the extra layer fades out to nothing.
+      final s4 = PxDsElevation.pxLight.lerp(PxDsElevation.pxDark, 1).shadow4;
+      expect(s4.first, PxDsElevation.pxDark.shadow4.first);
+      expect(s4.skip(1).every((s) => s.color.a == 0 && s.blurRadius == 0), isTrue);
       expect(PxDsTypography.standard.lerp(PxDsTypography.standard, 0.5).textHeadingLg.fontSize, 36);
     });
 
@@ -56,12 +61,18 @@ void main() {
       expect(t.textHeadingLg.fontVariations, [const FontVariation('wght', 600)]);
     });
 
-    test('the font files are in the asset bundle', () async {
+    test('the font files are declared and in the asset bundle', () async {
+      // In this package's own tests the families have no packages/px_ds/ prefix; an app that depends
+      // on px_ds sees them as packages/px_ds/<family>, which is what the text roles ask for.
       final manifest = jsonDecode(await rootBundle.loadString('FontManifest.json')) as List<dynamic>;
-      final families = manifest.map((f) => (f as Map<String, dynamic>)['family']).toSet();
-      expect(families, containsAll(['packages/px_ds/Atkinson Hyperlegible Next', 'packages/px_ds/Hack']));
+      final assets = <String>[
+        for (final family in manifest)
+          for (final font in (family as Map<String, dynamic>)['fonts'] as List<dynamic>) (font as Map<String, dynamic>)['asset'] as String,
+      ];
       for (final f in ['AtkinsonHyperlegibleNext-Var.ttf', 'AtkinsonHyperlegibleNext-VarItalic.ttf', 'hack-regular.ttf', 'hack-bold.ttf']) {
-        final bytes = await rootBundle.load('packages/px_ds/assets/fonts/$f');
+        final key = assets.firstWhere((a) => a.endsWith('assets/fonts/$f'), orElse: () => '');
+        expect(key, isNotEmpty, reason: '$f is not declared in pubspec.yaml');
+        final bytes = await rootBundle.load(key);
         expect(bytes.lengthInBytes, greaterThan(50000), reason: f);
       }
     });
@@ -86,11 +97,11 @@ void main() {
   testWidgets('switching brightness animates between the light and dark extensions', (tester) async {
     Widget app(Brightness b) => MaterialApp(
           theme: ThemeData(brightness: b, extensions: PxDsTheme.extensions(PxDsBrand.px, b)),
-          home: Builder(builder: (context) => ColoredBox(color: Theme.of(context).extension<PxDsColors>()!.colorSurfacePage)),
+          home: Builder(builder: (context) => ColoredBox(key: const Key('page'), color: Theme.of(context).extension<PxDsColors>()!.colorSurfacePage)),
         );
     await tester.pumpWidget(app(Brightness.light));
     await tester.pumpWidget(app(Brightness.dark));
     await tester.pumpAndSettle();
-    expect(tester.widget<ColoredBox>(find.byType(ColoredBox)).color, PxDsColors.pxDark.colorSurfacePage);
+    expect(tester.widget<ColoredBox>(find.byKey(const Key('page'))).color, PxDsColors.pxDark.colorSurfacePage);
   });
 }
