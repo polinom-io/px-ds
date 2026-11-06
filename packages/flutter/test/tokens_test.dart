@@ -38,10 +38,10 @@ void main() {
       expect(a.lerp(null, 0.5), same(a));
       // Same number of layers: lerp lands exactly on the other end.
       expect(PxDsElevation.pxLight.lerp(PxDsElevation.pxDark, 1).shadow1, PxDsElevation.pxDark.shadow1);
-      // Light shadow4 has two layers, dark one: the extra layer fades out to nothing.
+      // Light shadow4 has two layers, dark one: Flutter scales the extra layer down to zero size.
       final s4 = PxDsElevation.pxLight.lerp(PxDsElevation.pxDark, 1).shadow4;
       expect(s4.first, PxDsElevation.pxDark.shadow4.first);
-      expect(s4.skip(1).every((s) => s.color.a == 0 && s.blurRadius == 0), isTrue);
+      expect(s4.skip(1).every((s) => s.offset == Offset.zero && s.blurRadius == 0 && s.spreadRadius == 0), isTrue);
       expect(PxDsTypography.standard.lerp(PxDsTypography.standard, 0.5).textHeadingLg.fontSize, 36);
     });
 
