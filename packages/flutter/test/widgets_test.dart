@@ -11,12 +11,12 @@ void main() {
       await tester.pumpWidget(themed(PxDsButton(label: 'Save changes', onPressed: () => taps++)));
       await tester.tap(find.text('Save changes'));
       expect(taps, 1);
-      expect(tester.getSemantics(find.byType(TextButton)), containsSemantics(label: 'Save changes', isButton: true, isEnabled: true, hasTapAction: true));
+      expect(tester.getSemantics(find.byType(TextButton)), isSemantics(label: 'Save changes', isButton: true, isEnabled: true, hasTapAction: true));
     });
 
     testWidgets('null onPressed is disabled and faded', (tester) async {
       await tester.pumpWidget(themed(const PxDsButton(label: 'Save', onPressed: null)));
-      expect(tester.getSemantics(find.byType(TextButton)), containsSemantics(isButton: true, isEnabled: false));
+      expect(tester.getSemantics(find.byType(TextButton)), isSemantics(isButton: true, isEnabled: false));
       expect(tester.widget<Opacity>(find.byType(Opacity)).opacity, PxDsTokens.opacityDisabled);
     });
 
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(themed(const PxDsTextField(label: 'Email', required: true, error: 'Enter a valid email address.')));
       final node = tester.getSemantics(find.byType(TextField));
       expect(node.getSemanticsData().label, contains('Email, required'));
-      expect(node, containsSemantics(isTextField: true));
+      expect(node, isSemantics(isTextField: true));
       expect(find.text('Enter a valid email address.'), findsOneWidget);
       expect(find.byType(PxDsIcon), findsOneWidget); // the error has an icon, not colour alone
       handle.dispose();
@@ -78,7 +78,7 @@ void main() {
   testWidgets('PxDsCard marks its title as a heading', (tester) async {
     final handle = tester.ensureSemantics();
     await tester.pumpWidget(themed(const PxDsCard(tone: PxDsTone.secondary, exponent: 'x³', title: 'Strategy', body: 'The highest-degree term.')));
-    expect(tester.getSemantics(find.text('Strategy')), containsSemantics(isHeader: true));
+    expect(tester.getSemantics(find.text('Strategy')), isSemantics(isHeader: true));
     handle.dispose();
   });
 
@@ -88,7 +88,7 @@ void main() {
       for (final tone in PxDsAlertTone.values) {
         await tester.pumpWidget(themed(PxDsAlert(tone: tone, title: 'T')));
         final urgent = tone == PxDsAlertTone.warning || tone == PxDsAlertTone.danger;
-        expect(tester.getSemantics(find.byType(PxDsAlert)), containsSemantics(isLiveRegion: urgent), reason: '$tone');
+        expect(tester.getSemantics(find.byType(PxDsAlert)), isSemantics(isLiveRegion: urgent), reason: '$tone');
       }
       handle.dispose();
     });
