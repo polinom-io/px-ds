@@ -1,4 +1,4 @@
-<!-- px-context v0.1.1. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v0.2.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
