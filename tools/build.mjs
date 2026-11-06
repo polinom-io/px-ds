@@ -5,9 +5,9 @@
 //   node tools/build.mjs --check    write nothing; fail if a generated file differs from what is committed
 //
 // Paths follow the repo layout (polinom-io/px-ds). Override any of them with --tokens, --motion,
-// --pairs, --css or --dart, e.g. --tokens path/to/tokens.json.
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+// --pairs, --css, --dart, --fonts or --flutter-fonts, e.g. --tokens path/to/tokens.json.
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { buildWebCss } from './build-web-css.mjs';
 import { buildDart } from './build-dart.mjs';
 import { verifyWebCss } from './verify-web-css.mjs';
@@ -24,6 +24,8 @@ const paths = {
   pairs: opt('pairs', 'tokens/contrast-pairs.json'),
   css: opt('css', 'packages/web/src/tokens/tokens.css'),
   dart: opt('dart', 'packages/flutter/lib/src/tokens/tokens.g.dart'),
+  fonts: opt('fonts', 'assets/fonts'),
+  flutterFonts: opt('flutter-fonts', 'packages/flutter/assets/fonts'),
 };
 
 const failures = [];
@@ -40,6 +42,16 @@ const emit = (path, content) => {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, content);
   return `wrote ${path}`;
+};
+// Same as emit, for binary files (fonts): compares bytes.
+const emitCopy = (from, to) => {
+  const bytes = readFileSync(from);
+  if (check) {
+    if (!existsSync(to) || !readFileSync(to).equals(bytes)) throw new Error(`${to} is out of date: run node tools/build.mjs and commit the result`);
+    return;
+  }
+  mkdirSync(dirname(to), { recursive: true });
+  writeFileSync(to, bytes);
 };
 
 const T = JSON.parse(readFileSync(paths.tokens, 'utf8'));
@@ -61,6 +73,15 @@ step('CVD report (informational, §6.1)', () => {
   const low = rows.filter((r) => band(Math.min(r.protan, r.deutan)) === 'CONFUSABLE');
   return `${rows.length} pairs, ${low.length} under 10 (allowed: labels carry meaning)${low.length ? `\n     ${low.map((r) => `${r.brand} ${r.mode} ${r.group} ${r.pair}`).join('\n     ')}` : ''}`;
 });
-// Still to add (spec §12): icon generation, font copying into each package, Swift and Kotlin exports.
+step('Flutter fonts (ttf + licences)', () => {
+  // Flutter cannot load woff2, so packages/flutter bundles the ttf files from assets/fonts.
+  const files = readdirSync(paths.fonts).filter((f) => f.endsWith('.ttf') || f.endsWith('-LICENSE.txt')).sort();
+  if (!files.some((f) => f.endsWith('.ttf'))) throw new Error(`no .ttf files in ${paths.fonts}`);
+  for (const f of files) emitCopy(join(paths.fonts, f), join(paths.flutterFonts, f));
+  const stale = existsSync(paths.flutterFonts) ? readdirSync(paths.flutterFonts).filter((f) => !files.includes(f)) : [];
+  if (stale.length) throw new Error(`${paths.flutterFonts} has files not in ${paths.fonts}: ${stale.join(', ')}`);
+  return `${files.length} files ${check ? 'up to date' : `copied to ${paths.flutterFonts}`}`;
+});
+// Still to add (spec §12): icon generation, Swift and Kotlin exports.
 
 if (failures.length) { console.log(`\n${failures.length} step(s) failed: ${failures.join(', ')}`); process.exit(1); }
