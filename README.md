@@ -105,6 +105,20 @@ All packages are public and released together under one version. A site that use
 
 GitHub Packages needs a token to install, even for public packages. It goes in each developer's `~/.npmrc` (`//npm.pkg.github.com/:_authToken=<token with read:packages>`) or comes from CI; pnpm 12 ignores credentials in a project's own `.npmrc`. See [packages/web/README.md](packages/web/README.md).
 
+## Releasing
+
+All packages share one version. To release the web package:
+
+1. In a pull request, set `"version"` in `packages/web/package.json` (for example `0.2.0`) and merge it.
+2. Tag that commit on `main` with the same version and push the tag:
+   ```sh
+   git checkout main && git pull
+   git tag v0.2.0 && git push origin v0.2.0
+   ```
+3. The **Release** workflow checks that the tag matches the version and is on `main`, runs the token check, typecheck, tests and build, publishes `@polinom-io/px-ds-react` to GitHub Packages and creates a GitHub release with generated notes.
+
+A tag with a hyphen (`v0.2.0-rc.1`) publishes under the `next` dist-tag and is marked as a pre-release, so `latest` only moves on real releases. Pull requests that touch the package run the same workflow as a dry run and list the package contents in the job summary.
+
 ## Accessibility
 
 Every colour pair in `tokens/contrast-pairs.json` meets WCAG 2.2 AA in all four themes: 4.5:1 for text, 3:1 for control outlines, focus rings and other non-text parts. Colour never carries meaning alone. Every component must also work at 200% text scale and respect the reduced-motion setting on its platform; those checks arrive with the components.
