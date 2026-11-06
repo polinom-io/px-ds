@@ -1,0 +1,3 @@
+tags:
+  # Renders every widget in the four themes to test/goldens/ for review (CI uploads them).
+  gallery:
