@@ -64,7 +64,9 @@ void main() {
       await tester.pumpWidget(themed(const PxDsTextField(label: 'Name', helper: 'As on your ID')));
       expect(find.text('As on your ID'), findsOneWidget);
       await tester.pumpWidget(themed(const PxDsTextField(label: 'Name', helper: 'As on your ID', error: 'Required')));
+      await tester.pumpAndSettle(); // the helper fades out before it leaves the tree
       expect(find.text('As on your ID'), findsNothing);
+      expect(find.text('Required'), findsOneWidget);
     });
 
     testWidgets('reports typing', (tester) async {
@@ -101,8 +103,18 @@ void main() {
 
   group('PxDsIcon', () {
     test('every icon has an outline inside the 256 grid', () {
+      // getBounds() includes curve control points, which sit outside the outline, so trace the
+      // outline itself and take the bounds of the points on it.
       for (final icon in PxDsIcons.all) {
-        final b = icon.path.getBounds();
+        var minX = double.infinity, minY = double.infinity, maxX = -double.infinity, maxY = -double.infinity;
+        for (final metric in icon.path.computeMetrics()) {
+          for (var d = 0.0; d <= metric.length; d += 0.5) {
+            final p = metric.getTangentForOffset(d)!.position;
+            minX = p.dx < minX ? p.dx : minX; minY = p.dy < minY ? p.dy : minY;
+            maxX = p.dx > maxX ? p.dx : maxX; maxY = p.dy > maxY ? p.dy : maxY;
+          }
+        }
+        final b = Rect.fromLTRB(minX, minY, maxX, maxY);
         expect(b.width, greaterThan(50), reason: icon.name);
         expect(b.left >= -1 && b.top >= -1 && b.right <= 257 && b.bottom <= 257, isTrue, reason: '${icon.name} $b');
       }
