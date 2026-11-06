@@ -34,7 +34,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "src/components/*/README.md"
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
