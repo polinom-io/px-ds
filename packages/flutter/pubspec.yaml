@@ -1,0 +1,47 @@
+name: px_ds
+description: Polinom.io Design System for Flutter. Design tokens as theme extensions, and the brand fonts.
+version: 0.1.0
+repository: https://github.com/polinom-io/px-ds/tree/main/packages/flutter
+# Installed from a release tag of polinom-io/px-ds, not from pub.dev.
+publish_to: none
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  # Copied from assets/fonts/ by `node tools/build.mjs`; do not edit here.
+  # Atkinson Hyperlegible Next is one variable font (wght 200-800). Each weight the text roles use is
+  # declared, so Flutter matches it exactly instead of synthesising bold; the generated TextStyles set
+  # the same weight through FontVariation('wght', ...).
+  fonts:
+    - family: Atkinson Hyperlegible Next
+      fonts:
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-Var.ttf
+          weight: 400
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-Var.ttf
+          weight: 500
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-Var.ttf
+          weight: 600
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-Var.ttf
+          weight: 700
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-VarItalic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/AtkinsonHyperlegibleNext-VarItalic.ttf
+          weight: 700
+          style: italic
+    - family: Hack
+      fonts:
+        - asset: assets/fonts/hack-regular.ttf
+          weight: 400
+        - asset: assets/fonts/hack-bold.ttf
+          weight: 700

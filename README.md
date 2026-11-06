@@ -15,11 +15,11 @@ px-ds/
 ├── tools/                   token build: Node, no dependencies
 ├── packages/
 │   ├── web/                 @polinom-io/px-ds-react: 14 React components, src/tokens/tokens.css (generated)
-│   └── flutter/             lib/src/tokens/tokens.g.dart (generated)
+│   └── flutter/             px_ds: tokens as ThemeExtensions (lib/src/tokens/tokens.g.dart) and fonts (assets/fonts), generated
 └── assets/fonts/            Atkinson Hyperlegible Next, Hack (woff2 + ttf) and their licences
 ```
 
-Planned next: Flutter widgets in `packages/flutter`, an Astro playground and a Flutter gallery under `apps/`. iOS and Android come in Phase 2.
+Planned next: Flutter widgets in `packages/flutter` (the package itself holds tokens and fonts today), an Astro playground and a Flutter gallery under `apps/`. iOS and Android come in Phase 2.
 
 ## Quick start
 
@@ -86,7 +86,7 @@ MaterialApp(
 final colors = Theme.of(context).extension<PxDsColors>()!;
 ```
 
-The Dart file has been checked value by value against the tokens but not yet compiled in a Flutter project; the first Flutter CI run will do that.
+CI compiles and tests it on every pull request (Flutter 3.47.9). Install it as shown in [packages/flutter/README.md](packages/flutter/README.md).
 
 ## Packages (planned)
 

@@ -22,6 +22,7 @@ deferred do dynamic else enum export extends extension external factory false fi
 if implements import in interface is late library mixin new null of on operator part required rethrow return sealed
 set show static super switch sync this throw true try type typedef var void when while with yield`.split(/\s+/));
 const REM = 16; // 1rem = 16 logical pixels
+const PACKAGE = 'px_ds'; // the Flutter package that bundles the fonts (packages/flutter)
 const GENERIC = new Set(['system-ui', 'sans-serif', 'serif', 'monospace', 'ui-monospace', 'ui-sans-serif', 'ui-serif', 'cursive']);
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 
@@ -166,7 +167,8 @@ export function buildDart(T, M) {
       const lh = /[a-z]/.test(String(s.lineHeight)) ? px(s.lineHeight, ident) : parseFloat(s.lineHeight) * size;
       const w = parseInt(String(s.fontWeight).split(/\s+/)[0], 10);
       const ls = px(s.letterSpacing || '0', ident, size);
-      const parts = [`fontFamily: ${JSON.stringify(famFirst[fam])}`, `fontSize: ${num(size)}`, `height: ${num(lh / size)}`,
+      // Fonts ship inside the px_ds package, so Flutter resolves them as packages/px_ds/<family>.
+      const parts = [`fontFamily: ${JSON.stringify(famFirst[fam])}`, `package: ${JSON.stringify(PACKAGE)}`, `fontSize: ${num(size)}`, `height: ${num(lh / size)}`,
         `fontWeight: FontWeight.w${w}`, `fontVariations: [FontVariation('wght', ${num(w)})]`];
       if (ls) parts.push(`letterSpacing: ${num(ls)}`);
       if (s.fontStyle === 'italic') parts.push('fontStyle: FontStyle.italic');
