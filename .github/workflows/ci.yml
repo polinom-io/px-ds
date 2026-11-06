@@ -82,4 +82,18 @@ jobs:
       - run: flutter pub get
       # The first real compile of the generated tokens.g.dart.
       - run: flutter analyze
-      - run: flutter test
+      - run: flutter test --exclude-tags gallery
+      # Visual review: render every widget in the four themes with the real fonts.
+      - name: Render the widget gallery
+        run: flutter test --tags gallery --update-goldens
+      # Also print it into the log as base64, for reviewers that can read logs but not artifacts.
+      - name: Gallery as base64 (between markers)
+        run: |
+          echo "----- BEGIN gallery.png -----"
+          base64 -w 4000 test/goldens/gallery.png
+          echo "----- END gallery.png -----"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flutter-gallery
+          path: packages/flutter/test/goldens/
+          if-no-files-found: error
