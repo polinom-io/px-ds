@@ -46,6 +46,25 @@ void main() {
               const SizedBox(height: 8),
               const PxDsAlert(tone: PxDsAlertTone.danger, title: 'Payment failed'),
               const SizedBox(height: 16),
+              PxDsSwitch(label: 'Reminders', description: 'Daily at 9:00', value: true, onChanged: (_) {}),
+              PxDsSwitch(label: 'Share with my clinic', value: false, onChanged: (_) {}),
+              const PxDsSwitch(label: 'Disabled', value: true, onChanged: null),
+              PxDsCheckbox(label: 'I agree to the privacy policy', value: true, onChanged: (_) {}),
+              PxDsCheckbox(label: 'Select all', value: null, tristate: true, onChanged: (_) {}),
+              PxDsCheckbox(label: 'Accept the terms', value: false, error: 'Accept the terms to continue.', onChanged: (_) {}),
+              const SizedBox(height: 8),
+              PxDsRadioGroup<String>(
+                label: 'How often?',
+                required: true,
+                value: 'daily',
+                onChanged: (_) {},
+                options: const [
+                  PxDsRadioOption(value: 'daily', label: 'Every day'),
+                  PxDsRadioOption(value: 'weekly', label: 'Every week', description: 'On Mondays'),
+                  PxDsRadioOption(value: 'never', label: 'Never', enabled: false),
+                ],
+              ),
+              const SizedBox(height: 16),
               const PxDsCard(tone: PxDsTone.secondary, exponent: 'x³', title: 'Strategy', body: 'The highest-degree term.'),
               const SizedBox(height: 16),
               Wrap(spacing: 12, runSpacing: 12, children: [
@@ -60,7 +79,7 @@ void main() {
       );
 
   testWidgets('gallery: all widgets in the four themes', (tester) async {
-    tester.view.physicalSize = const Size(1600, 1400);
+    tester.view.physicalSize = const Size(1600, 1900);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(MaterialApp(

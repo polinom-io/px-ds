@@ -1,8 +1,10 @@
 import 'dart:ui' show SemanticsValidationResult;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:px_ds/px_ds.dart';
+import 'package:px_ds/src/widgets/selection_row.dart';
 
 import 'support.dart';
 
@@ -138,6 +140,133 @@ void main() {
       await tester.pumpWidget(themed(const Row(children: [PxDsIcon(PxDsIcons.trash, semanticLabel: 'Delete'), PxDsIcon(PxDsIcons.info)])));
       expect(find.bySemanticsLabel('Delete'), findsOneWidget);
       handle.dispose();
+    });
+  });
+
+  group('PxDsSwitch', () {
+    testWidgets('toggles on tap anywhere on the row and reads as on/off', (tester) async {
+      final handle = tester.ensureSemantics();
+      var value = false;
+      await tester.pumpWidget(themed(StatefulBuilder(
+        builder: (context, set) => PxDsSwitch(label: 'Reminders', value: value, onChanged: (v) => set(() => value = v)),
+      )));
+      expect(tester.getSemantics(find.byType(PxDsSwitch)), isSemantics(label: 'Reminders', hasToggledState: true, isToggled: false, isEnabled: true, hasTapAction: true));
+      await tester.tap(find.text('Reminders'));
+      await tester.pumpAndSettle();
+      expect(value, isTrue);
+      expect(tester.getSemantics(find.byType(PxDsSwitch)), isSemantics(hasToggledState: true, isToggled: true));
+      handle.dispose();
+    });
+
+    testWidgets('Space toggles it when focused', (tester) async {
+      var value = false;
+      await tester.pumpWidget(themed(StatefulBuilder(
+        builder: (context, set) => PxDsSwitch(label: 'Reminders', value: value, onChanged: (v) => set(() => value = v)),
+      )));
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.space);
+      await tester.pump();
+      expect(value, isTrue);
+    });
+
+    testWidgets('the row is at least 48 tall and null onChanged disables it', (tester) async {
+      await tester.pumpWidget(themed(const Align(alignment: Alignment.topLeft, child: PxDsSwitch(label: 'Off', value: false, onChanged: null))));
+      expect(tester.getSize(find.byType(PxDsSwitch)).height, greaterThanOrEqualTo(48));
+      await tester.tap(find.text('Off'), warnIfMissed: false);
+      expect(find.byType(Opacity), findsOneWidget);
+    });
+  });
+
+  group('PxDsCheckbox', () {
+    testWidgets('checks on tap and exposes the checked state', (tester) async {
+      final handle = tester.ensureSemantics();
+      bool? value = false;
+      await tester.pumpWidget(themed(StatefulBuilder(
+        builder: (context, set) => PxDsCheckbox(label: 'I agree', value: value, onChanged: (v) => set(() => value = v)),
+      )));
+      expect(tester.getSemantics(find.byType(PxDsCheckbox)), isSemantics(label: 'I agree', hasCheckedState: true, isChecked: false));
+      await tester.tap(find.text('I agree'));
+      await tester.pump();
+      expect(value, isTrue);
+      expect(tester.getSemantics(find.byType(PxDsCheckbox)), isSemantics(hasCheckedState: true, isChecked: true));
+      handle.dispose();
+    });
+
+    testWidgets('indeterminate shows a minus, reads as mixed, and checks on tap', (tester) async {
+      final handle = tester.ensureSemantics();
+      bool? value;
+      await tester.pumpWidget(themed(StatefulBuilder(
+        builder: (context, set) => PxDsCheckbox(label: 'Select all', value: value, tristate: true, onChanged: (v) => set(() => value = v)),
+      )));
+      expect(tester.widget<PxDsIcon>(find.byType(PxDsIcon)).icon, PxDsIcons.minus);
+      expect(tester.getSemantics(find.byType(PxDsCheckbox)), isSemantics(hasCheckedState: true, isCheckStateMixed: true));
+      await tester.tap(find.text('Select all'));
+      await tester.pump();
+      expect(value, isTrue);
+      handle.dispose();
+    });
+
+    testWidgets('an error has an icon and is read with the label', (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(themed(PxDsCheckbox(label: 'Accept the terms', value: false, error: 'Accept the terms to continue.', onChanged: (_) {})));
+      expect(find.text('Accept the terms to continue.'), findsOneWidget);
+      expect(find.byWidgetPredicate((w) => w is PxDsIcon && w.icon == PxDsIcons.xCircle), findsOneWidget);
+      expect(tester.getSemantics(find.byType(PxDsSelectionRow)).getSemanticsData().label, 'Accept the terms, Accept the terms to continue.');
+      handle.dispose();
+    });
+  });
+
+  group('PxDsRadioGroup', () {
+    Widget group(String? initial, {void Function(String)? spy}) {
+      var value = initial;
+      return themed(StatefulBuilder(
+        builder: (context, set) => PxDsRadioGroup<String>(
+          label: 'How often?',
+          value: value,
+          onChanged: (v) => set(() {
+            value = v;
+            spy?.call(v);
+          }),
+          options: const [
+            PxDsRadioOption(value: 'daily', label: 'Every day'),
+            PxDsRadioOption(value: 'weekly', label: 'Every week'),
+            PxDsRadioOption(value: 'monthly', label: 'Every month', enabled: false),
+            PxDsRadioOption(value: 'never', label: 'Never'),
+          ],
+        ),
+      ));
+    }
+
+    testWidgets('selects on tap; options are checked radios in one group', (tester) async {
+      final handle = tester.ensureSemantics();
+      String? picked;
+      await tester.pumpWidget(group(null, spy: (v) => picked = v));
+      await tester.tap(find.text('Every week'));
+      await tester.pump();
+      expect(picked, 'weekly');
+      expect(tester.getSemantics(find.text('Every week')), isSemantics(hasCheckedState: true, isChecked: true, isInMutuallyExclusiveGroup: true));
+      expect(tester.getSemantics(find.text('Every day')), isSemantics(hasCheckedState: true, isChecked: false, isInMutuallyExclusiveGroup: true));
+      expect(find.bySemanticsLabel('How often?'), findsOneWidget);
+      handle.dispose();
+    });
+
+    testWidgets('Tab lands on the selected option; arrows move and select, skipping disabled', (tester) async {
+      String? picked;
+      await tester.pumpWidget(group('weekly', spy: (v) => picked = v));
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+      final focused = FocusManager.instance.primaryFocus!;
+      expect(focused.debugLabel, 'PxDsRadioGroup option 1');
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await tester.pump();
+      expect(picked, 'never'); // 'monthly' is disabled
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+      await tester.pump();
+      expect(picked, 'daily'); // wraps
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowUp);
+      await tester.pump();
+      expect(picked, 'never');
     });
   });
 
