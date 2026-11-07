@@ -67,7 +67,7 @@ void main() {
               const SizedBox(height: 16),
               PxDsDialog(
                 title: 'Delete this entry?',
-                message: 'This removes the pain entry from your history. You can't undo this.',
+                message: "This removes the pain entry from your history. You can't undo this.",
                 alert: true,
                 actions: [
                   PxDsButton(label: 'Keep entry', variant: PxDsButtonVariant.ghost, onPressed: () {}),
