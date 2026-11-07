@@ -65,6 +65,18 @@ void main() {
                 ],
               ),
               const SizedBox(height: 16),
+              PxDsDialog(
+                title: 'Delete this entry?',
+                message: 'This removes the pain entry from your history. You can't undo this.',
+                alert: true,
+                actions: [
+                  PxDsButton(label: 'Keep entry', variant: PxDsButtonVariant.ghost, onPressed: () {}),
+                  PxDsButton(label: 'Delete entry', variant: PxDsButtonVariant.danger, onPressed: () {}),
+                ],
+              ),
+              const SizedBox(height: 8),
+              PxDsDialog(title: 'Reminder time', message: 'Choose when we remind you to log pain.', actions: [PxDsButton(label: 'Save', onPressed: () {})]),
+              const SizedBox(height: 16),
               const PxDsCard(tone: PxDsTone.secondary, exponent: 'x³', title: 'Strategy', body: 'The highest-degree term.'),
               const SizedBox(height: 16),
               Wrap(spacing: 12, runSpacing: 12, children: [
@@ -79,7 +91,7 @@ void main() {
       );
 
   testWidgets('gallery: all widgets in the four themes', (tester) async {
-    tester.view.physicalSize = const Size(1600, 1900);
+    tester.view.physicalSize = const Size(1600, 2500);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     await tester.pumpWidget(MaterialApp(
