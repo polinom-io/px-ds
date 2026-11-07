@@ -7,7 +7,7 @@
 /// ```
 ///
 /// then use the widgets (`PxDsButton`, `PxDsTextField`, `PxDsCheckbox`, `PxDsRadioGroup`, `PxDsSwitch`,
-/// `PxDsCard`, `PxDsAlert`, `PxDsIcon`) or
+/// `showPxDsDialog`, `PxDsCard`, `PxDsAlert`, `PxDsIcon`) or
 /// read the tokens with `Theme.of(context).extension<PxDsColors>()!`.
 library;
 
@@ -17,6 +17,7 @@ export 'src/widgets/alert.dart';
 export 'src/widgets/button.dart';
 export 'src/widgets/card.dart';
 export 'src/widgets/checkbox.dart';
+export 'src/widgets/dialog.dart';
 export 'src/widgets/icon.dart';
 export 'src/widgets/radio_group.dart';
 export 'src/widgets/switch.dart';
