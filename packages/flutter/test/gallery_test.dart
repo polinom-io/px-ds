@@ -79,6 +79,21 @@ void main() {
               const SizedBox(height: 16),
               const PxDsCard(tone: PxDsTone.secondary, exponent: 'x³', title: 'Strategy', body: 'The highest-degree term.'),
               const SizedBox(height: 16),
+              const PxDsBox(
+                padding: PxDsSpace.s4,
+                surface: PxDsSurface.sunken,
+                bordered: true,
+                radius: PxDsRadius.md,
+                child: PxDsStack(gap: PxDsSpace.s3, align: CrossAxisAlignment.stretch, children: [
+                  Text('Box, Stack and Divider'),
+                  PxDsDivider(label: 'or'),
+                  SizedBox(
+                    height: 24,
+                    child: PxDsStack.horizontal(gap: PxDsSpace.s2, align: CrossAxisAlignment.stretch, children: [Text('One'), PxDsDivider(axis: Axis.vertical), Text('Two')]),
+                  ),
+                ]),
+              ),
+              const SizedBox(height: 16),
               Wrap(spacing: 12, runSpacing: 12, children: [
                 for (final icon in PxDsIcons.all) PxDsIcon(icon, size: 24, color: c.colorTextDefault),
               ]),
