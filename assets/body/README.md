@@ -21,6 +21,6 @@ These files are the source. The token build will turn them into Flutter paths an
 
 ## Draft 1 notes
 
-- Drawn from simple geometry (ellipse head, tapered limbs) and cut into regions along straight lines, so shared edges are exact.
-- Smallest regions at the 440 dp selecting size: front ankles 16 × 18 dp and feet 19 × 22 dp, under the 24 × 24 minimum; back elbows, hands and heels are larger (about 19–21 wide, 28–34 tall). The spec relies on the checkbox list for the ankles and feet (WCAG 2.5.8 equivalent-control exception). The review should decide whether that's acceptable or the ankle merges into the foot.
+- Straight-edged, cartoon-like style: every line is a straight segment (octagonal head, four-sided limbs, polygon hands and feet), with sharp mitred joins. Cut into regions along straight lines, so shared edges are exact.
+- Smallest regions at the 440 dp selecting size: front ankles 16 × 18 dp and feet 21 × 22 dp, under the 24 × 24 minimum; elbows, hands and heels are larger (about 19–21 wide, 28–35 tall). The spec relies on the checkbox list for the ankles and feet (WCAG 2.5.8 equivalent-control exception). The review should decide whether that's acceptable or the ankle merges into the foot.
 - Not yet checked by the build: that comes with the region build step.

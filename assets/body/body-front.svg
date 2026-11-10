@@ -3,34 +3,34 @@
   <!-- Polinom.io Design System, INP-19. Each path is one region; its id is the stored region id (docs/specs/body-outline.md).
        The person's own left and right: on the front the person's right is drawn on the viewer's left. Colours here are for previewing only; the widget paints regions from tokens. -->
   <g fill="#E0ECF0" stroke="#8CA1A7" stroke-width="1" stroke-linejoin="round">
-  <path id="head-front" data-label-x="100" data-label-y="30" d="M89.6,52.0 L110.4,52.0 L110.7,50.8 L112.5,49.0 L114.3,46.8 L115.8,44.3 L117.0,41.6 L118.0,38.7 L118.6,35.7 L118.8,34.1 L119.0,31.0 L119.0,29.4 L118.6,26.3 L118.0,23.3 L117.0,20.4 L115.8,17.7 L114.3,15.2 L112.5,13.0 L110.6,11.1 L108.4,9.5 L106.1,8.3 L103.7,7.5 L101.3,7.1 L98.7,7.1 L96.3,7.5 L93.9,8.3 L91.6,9.5 L89.4,11.1 L87.5,13.0 L85.7,15.2 L84.2,17.7 L83.0,20.4 L82.0,23.3 L81.4,26.3 L81.2,27.9 L81.0,31.0 L81.0,32.6 L81.4,35.7 L82.0,38.7 L83.0,41.6 L84.2,44.3 L85.7,46.8 L87.5,49.0 L89.5,51.2Z"/>
-  <path id="neck-front" data-label-x="100" data-label-y="67" d="M110.4,52.0 L89.6,52.0 L88.4,73.0 L88.3,73.6 L87.5,74.1 L85.8,74.6 L85.5,80.0 L114.5,80.0 L114.2,74.6 L112.5,74.1 L111.7,73.6 L111.6,73.0Z"/>
-  <path id="hand-right-front" data-label-x="41" data-label-y="266" d="M50.8,250.0 L35.4,250.0 L32.5,259.1 L32.2,260.2 L32.0,262.6 L32.2,263.8 L32.6,265.5 L32.5,268.0 L32.7,271.1 L32.9,273.1 L33.4,275.1 L33.9,276.9 L34.6,278.5 L35.4,280.0 L36.3,281.3 L37.2,282.3 L38.8,283.4 L39.9,283.9 L41.0,284.0 L42.1,283.9 L43.2,283.4 L44.8,282.3 L45.7,281.3 L46.6,280.0 L47.4,278.5 L48.1,276.9 L48.6,275.1 L49.1,273.1 L49.3,271.1 L49.5,269.0 L49.4,265.3 L50.0,262.6Z"/>
-  <path id="hand-left-front" data-label-x="159" data-label-y="266" d="M164.6,250.0 L149.2,250.0 L150.0,262.6 L150.2,263.7 L150.6,265.3 L150.5,269.0 L150.7,271.1 L150.9,273.1 L151.4,275.1 L151.9,276.9 L152.6,278.5 L153.4,280.0 L154.3,281.3 L155.2,282.3 L156.8,283.4 L157.9,283.9 L159.0,284.0 L160.1,283.9 L161.2,283.4 L162.8,282.3 L163.7,281.3 L164.6,280.0 L165.4,278.5 L166.1,276.9 L166.6,275.1 L167.1,273.1 L167.3,271.1 L167.5,268.0 L167.4,265.3 L167.9,263.2 L167.9,260.8 L167.5,259.1Z"/>
-  <path id="forearm-right-front" data-label-x="47" data-label-y="216" d="M35.4,250.0 L50.8,250.0 L51.0,246.6 L59.5,184.0 L42.0,184.0 L37.1,244.5Z"/>
-  <path id="forearm-left-front" data-label-x="153" data-label-y="216" d="M149.2,250.0 L164.6,250.0 L162.9,244.5 L158.0,184.0 L140.5,184.0 L149.0,246.6Z"/>
-  <path id="elbow-right-front" data-label-x="52" data-label-y="170" d="M42.0,184.0 L59.5,184.0 L60.9,173.2 L61.0,170.9 L62.7,156.0 L44.0,156.0 L43.0,169.4 L43.1,171.0Z"/>
-  <path id="elbow-left-front" data-label-x="148" data-label-y="170" d="M140.5,184.0 L158.0,184.0 L156.9,171.0 L157.0,169.4 L156.0,156.0 L137.3,156.0 L139.0,170.9 L139.1,173.2Z"/>
-  <path id="upper-arm-right-front" data-label-x="56" data-label-y="132" d="M62.7,156.0 L63.9,145.1 L64.4,144.3 L68.6,108.0 L47.6,108.0 L44.0,156.0Z"/>
-  <path id="upper-arm-left-front" data-label-x="144" data-label-y="132" d="M137.3,156.0 L156.0,156.0 L152.4,108.0 L131.4,108.0 L135.6,144.3 L136.1,145.1Z"/>
-  <path id="shoulder-right-front" data-label-x="65" data-label-y="95" d="M47.6,108.0 L68.6,108.0 L79.0,108.0 L79.0,76.5 L70.0,79.0 L60.0,84.0 L59.6,84.9 L58.7,85.5 L56.3,85.9 L55.0,86.3 L53.8,86.9 L52.1,88.1 L51.1,89.1 L49.9,90.7 L49.1,92.6 L48.7,94.0 L48.5,95.3Z"/>
-  <path id="shoulder-left-front" data-label-x="135" data-label-y="95" d="M121.0,76.5 L121.0,108.0 L131.4,108.0 L152.4,108.0 L151.5,95.3 L151.1,93.3 L150.7,92.0 L150.1,90.8 L149.3,89.6 L148.4,88.6 L147.4,87.7 L145.7,86.6 L144.4,86.1 L142.4,85.6 L141.3,85.5 L140.6,85.1 L140.0,84.0 L130.0,79.0Z"/>
-  <path id="chest-right-front" data-label-x="85" data-label-y="118" d="M67.0,150.0 L100.0,150.0 L100.0,80.0 L85.5,80.0 L85.8,74.6 L79.0,76.5 L79.0,108.0 L68.6,108.0 L64.4,144.3 L65.6,144.1 L66.3,145.1Z"/>
-  <path id="chest-left-front" data-label-x="115" data-label-y="118" d="M135.6,144.3 L131.4,108.0 L121.0,108.0 L121.0,76.5 L114.2,74.6 L114.5,80.0 L100.0,80.0 L100.0,150.0 L133.0,150.0 L133.7,145.1 L134.4,144.1Z"/>
-  <path id="abdomen-upper-front" data-label-x="100" data-label-y="172" d="M70.1,196.0 L129.9,196.0 L129.0,187.9 L133.0,150.0 L100.0,150.0 L67.0,150.0 L71.0,187.9Z"/>
-  <path id="hip-right-front" data-label-x="76" data-label-y="231" d="M67.2,264.0 L84.0,264.0 L84.0,196.0 L70.1,196.0 L68.0,214.0 L66.0,236.0 L67.0,239.8 L67.0,240.4 L66.3,242.7 L66.0,244.9 L66.0,247.1Z"/>
-  <path id="hip-left-front" data-label-x="124" data-label-y="231" d="M129.9,196.0 L116.0,196.0 L116.0,264.0 L132.8,264.0 L134.0,247.1 L133.9,243.8 L133.0,239.8 L134.0,236.0 L132.0,214.0Z"/>
+  <path id="head-front" data-label-x="100" data-label-y="29" d="M90.9,52.0 L109.1,52.0 L109.1,51.8 L118.0,38.0 L118.0,17.0 L110.0,8.0 L90.0,8.0 L82.0,17.0 L82.0,38.0 L90.9,51.8Z"/>
+  <path id="neck-front" data-label-x="100" data-label-y="67" d="M109.1,52.0 L90.9,52.0 L90.2,74.0 L87.7,74.6 L87.5,80.0 L112.5,80.0 L112.3,74.6 L109.8,74.0Z"/>
+  <path id="hand-right-front" data-label-x="42" data-label-y="267" d="M51.6,250.0 L36.0,250.0 L33.0,256.0 L33.0,276.0 L37.0,285.0 L47.0,285.0 L52.0,276.0Z"/>
+  <path id="hand-left-front" data-label-x="158" data-label-y="267" d="M164.0,250.0 L148.4,250.0 L148.0,276.0 L153.0,285.0 L163.0,285.0 L167.0,276.0 L167.0,256.0Z"/>
+  <path id="forearm-right-front" data-label-x="48" data-label-y="216" d="M51.6,250.0 L51.5,246.4 L58.9,184.0 L42.6,184.0 L38.6,244.9 L36.0,250.0Z"/>
+  <path id="forearm-left-front" data-label-x="152" data-label-y="216" d="M148.4,250.0 L164.0,250.0 L161.4,244.9 L157.4,184.0 L141.1,184.0 L148.5,246.4Z"/>
+  <path id="elbow-right-front" data-label-x="52" data-label-y="170" d="M61.7,156.0 L44.1,156.0 L43.5,169.5 L42.6,184.0 L58.9,184.0 L60.5,170.8Z"/>
+  <path id="elbow-left-front" data-label-x="148" data-label-y="170" d="M141.1,184.0 L157.4,184.0 L156.5,169.6 L155.9,156.0 L138.3,156.0 L139.5,170.8Z"/>
+  <path id="upper-arm-right-front" data-label-x="55" data-label-y="131" d="M66.1,108.0 L46.3,108.0 L44.1,156.0 L61.7,156.0 L63.1,138.7 L63.5,138.7Z"/>
+  <path id="upper-arm-left-front" data-label-x="145" data-label-y="131" d="M138.3,156.0 L155.9,156.0 L153.7,108.0 L133.9,108.0 L136.5,138.7 L136.9,138.7Z"/>
+  <path id="shoulder-right-front" data-label-x="65" data-label-y="95" d="M46.3,108.0 L66.1,108.0 L79.0,108.0 L79.0,76.8 L66.0,80.0 L47.9,91.4 L47.0,91.4Z"/>
+  <path id="shoulder-left-front" data-label-x="135" data-label-y="95" d="M134.0,80.0 L121.0,76.8 L121.0,108.0 L133.9,108.0 L153.7,108.0 L153.0,91.4 L152.1,91.4Z"/>
+  <path id="chest-right-front" data-label-x="84" data-label-y="118" d="M66.0,150.0 L100.0,150.0 L100.0,80.0 L87.5,80.0 L87.7,74.6 L90.2,74.0 L66.0,80.0 L79.0,76.8 L79.0,108.0 L66.1,108.0 L63.5,138.7 L63.1,138.7 L63.6,138.7Z"/>
+  <path id="chest-left-front" data-label-x="116" data-label-y="118" d="M136.9,138.7 L136.5,138.7 L133.9,108.0 L121.0,108.0 L121.0,76.8 L134.0,80.0 L109.8,74.0 L112.3,74.6 L112.5,80.0 L100.0,80.0 L100.0,150.0 L134.0,150.0 L136.4,138.7Z"/>
+  <path id="abdomen-upper-front" data-label-x="100" data-label-y="172" d="M69.5,196.0 L130.5,196.0 L130.0,190.0 L134.0,150.0 L100.0,150.0 L66.0,150.0 L70.0,190.0Z"/>
+  <path id="hip-right-front" data-label-x="76" data-label-y="231" d="M68.2,264.0 L84.0,264.0 L84.0,196.0 L69.5,196.0 L66.5,236.0Z"/>
+  <path id="hip-left-front" data-label-x="124" data-label-y="231" d="M130.5,196.0 L116.0,196.0 L116.0,264.0 L131.8,264.0 L133.5,236.0Z"/>
   <path id="abdomen-lower-front" data-label-x="100" data-label-y="216" d="M116.0,236.0 L116.0,196.0 L84.0,196.0 L84.0,236.0Z"/>
-  <path id="groin-front" data-label-x="100" data-label-y="250" d="M101.1,264.0 L116.0,264.0 L116.0,236.0 L84.0,236.0 L84.0,264.0 L98.9,264.0 L99.7,263.3 L100.6,263.4Z"/>
-  <path id="thigh-right-front" data-label-x="83" data-label-y="289" d="M95.3,316.0 L98.8,264.4 L98.9,264.0 L84.0,264.0 L67.2,264.0 L70.7,316.0Z"/>
-  <path id="thigh-left-front" data-label-x="117" data-label-y="289" d="M104.7,316.0 L129.3,316.0 L132.8,264.0 L116.0,264.0 L101.1,264.0 L101.2,264.4Z"/>
-  <path id="knee-right-front" data-label-x="83" data-label-y="331" d="M72.5,346.0 L93.5,346.0 L94.5,330.8 L94.5,329.0 L95.3,316.0 L70.7,316.0 L71.5,329.0 L71.5,330.8Z"/>
-  <path id="knee-left-front" data-label-x="117" data-label-y="331" d="M106.5,346.0 L127.5,346.0 L128.5,330.8 L128.5,329.0 L129.3,316.0 L104.7,316.0 L105.5,329.0 L105.5,330.8Z"/>
-  <path id="shin-right-front" data-label-x="83" data-label-y="368" d="M90.7,392.0 L93.5,346.0 L72.5,346.0 L75.3,392.0Z"/>
-  <path id="shin-left-front" data-label-x="117" data-label-y="368" d="M124.7,392.0 L127.5,346.0 L106.5,346.0 L109.3,392.0Z"/>
-  <path id="ankle-right-front" data-label-x="83" data-label-y="401" d="M74.5,410.0 L90.4,410.0 L90.0,403.9 L90.7,392.0 L75.3,392.0 L75.9,403.3 L75.9,403.6Z"/>
-  <path id="ankle-left-front" data-label-x="117" data-label-y="401" d="M109.6,410.0 L125.5,410.0 L124.1,403.6 L124.1,403.3 L124.7,392.0 L109.3,392.0 L110.0,403.9Z"/>
-  <path id="foot-right-front" data-label-x="82" data-label-y="420" d="M74.5,410.0 L90.4,410.0 L91.0,417.3 L91.3,418.9 L91.5,421.0 L91.2,423.8 L90.2,426.5 L88.7,428.8 L86.8,430.5 L84.5,431.6 L83.3,431.9 L82.0,432.0 L79.5,431.6 L77.2,430.5 L75.3,428.8 L73.8,426.5 L72.8,423.8 L72.6,422.4 L72.5,420.3 L72.7,418.9 L73.2,416.2Z"/>
-  <path id="foot-left-front" data-label-x="118" data-label-y="420" d="M109.6,410.0 L125.5,410.0 L126.8,416.2 L127.3,418.9 L127.5,421.0 L127.2,423.8 L126.2,426.5 L124.7,428.8 L122.8,430.5 L120.5,431.6 L119.3,431.9 L118.0,432.0 L115.5,431.6 L113.2,430.5 L111.3,428.8 L109.8,426.5 L108.8,423.8 L108.6,422.4 L108.5,420.3 L109.0,417.3Z"/>
+  <path id="groin-front" data-label-x="100" data-label-y="250" d="M102.2,264.0 L116.0,264.0 L116.0,236.0 L84.0,236.0 L84.0,264.0 L97.8,264.0 L98.2,257.8 L100.0,258.0 L101.8,257.8Z"/>
+  <path id="thigh-right-front" data-label-x="83" data-label-y="289" d="M94.7,316.0 L97.8,264.0 L84.0,264.0 L68.2,264.0 L71.3,316.0Z"/>
+  <path id="thigh-left-front" data-label-x="117" data-label-y="289" d="M128.7,316.0 L131.8,264.0 L116.0,264.0 L102.2,264.0 L105.3,316.0Z"/>
+  <path id="knee-right-front" data-label-x="83" data-label-y="331" d="M73.1,346.0 L92.9,346.0 L94.7,316.0 L71.3,316.0Z"/>
+  <path id="knee-left-front" data-label-x="117" data-label-y="331" d="M107.1,346.0 L126.9,346.0 L128.7,316.0 L105.3,316.0Z"/>
+  <path id="shin-right-front" data-label-x="83" data-label-y="368" d="M90.2,392.0 L92.9,346.0 L73.1,346.0 L75.8,392.0Z"/>
+  <path id="shin-left-front" data-label-x="117" data-label-y="368" d="M124.2,392.0 L126.9,346.0 L107.1,346.0 L109.8,392.0Z"/>
+  <path id="ankle-right-front" data-label-x="83" data-label-y="401" d="M74.8,410.0 L90.5,410.0 L89.5,403.3 L90.2,392.0 L75.8,392.0 L76.5,403.2Z"/>
+  <path id="ankle-left-front" data-label-x="117" data-label-y="401" d="M109.5,410.0 L125.2,410.0 L123.5,403.2 L124.2,392.0 L109.8,392.0 L110.5,403.3Z"/>
+  <path id="foot-right-front" data-label-x="82" data-label-y="422" d="M74.8,410.0 L90.5,410.0 L92.0,420.0 L93.0,432.0 L72.0,432.0 L72.0,422.0Z"/>
+  <path id="foot-left-front" data-label-x="118" data-label-y="422" d="M109.5,410.0 L125.2,410.0 L128.0,422.0 L128.0,432.0 L107.0,432.0 L108.0,420.0Z"/>
   </g>
 </svg>
