@@ -2,7 +2,7 @@
 
 > Component spec, platform-neutral. References like §2.1 point to the design system specification, [`docs/spec.md`](../spec.md).
 
-**Status:** Design ☐ · Docs ☐     **Owner:** core team (spec), Flutter platform lead (build)     **Version:** 0.1.0 (draft, 6 Nov 2026)
+**Status:** Design ☐ · Docs ☐     **Owner:** core team (spec), Flutter platform lead (build)     **Version:** 0.1.1 (draft, 10 Nov 2026)
 
 ### Platform status
 | Platform | Status | Component name in code | Notes / deviations |
@@ -110,7 +110,7 @@ The region list is part of the API: renaming or removing a region is a breaking 
 |---|---|---|---|
 | Small | 160 dp | Display-only in a card or list row | No region labels; selection summary required |
 | Medium | 320 dp | Display-only on a detail screen | Region labels allowed |
-| Large | 440 dp minimum, fills available height | Select (Log pain) | Smallest regions (wrist and hand, ankle, heel) are about 24 × 24 dp at this size; see Behavior for hit areas |
+| Large | 440 dp minimum, fills available height | Select (Log pain) | Smallest regions in draft 1 artwork: ankle 16 × 18 dp, foot 19 × 22, wrist and hand 19 wide; see Behavior for hit areas |
 
 Selecting is only allowed at Large. Below 440 dp the hand and foot regions get too small to tap reliably.
 
@@ -141,7 +141,7 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 - **Announcements:** toggling a region announces its new state ("Left knee, front, selected"). Switching face announces "Back view" or "Front view".
 - **Not by colour alone:** a selected region gets a thicker outline as well as a fill, and the selection summary always names every selected region in words. Display-only values always appear as label text, never as shading alone (§6.1).
 - **List alternative:** "Choose from a list" shows the same regions as checkboxes (INP-05), grouped by area (Head and neck, Arms and hands, Torso, Back, Legs and feet), bound to the same selection. This is the equivalent control that keeps small regions within WCAG 2.5.8 (target size) and serves anyone who can't use the figure. It is always available in select mode.
-- **Target size:** smallest regions are about 24 × 24 dp at Large size plus the edge margin, which meets the WCAG 2.2 minimum but not the 44/48 dp touch recommendation (§6). The list alternative covers the gap.
+- **Target size:** measured on the draft 1 artwork at Large size, the ankles (16 × 18 dp) and feet (19 × 22 dp) are under the WCAG 2.2 minimum of 24 × 24, even with the 8 dp edge margin on the outer side. Conformance rests on the list alternative (WCAG 2.5.8 equivalent-control exception), so it must stay available in select mode. None of the regions reach the 44/48 dp touch recommendation (§6).
 - **The figure itself** is excluded from semantics apart from its regions; it has no image description, because the regions and summary carry its meaning.
 
 ### Tokens used
@@ -198,3 +198,4 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 | Version | Date | Change |
 |---|---|---|
 | 0.1.0 | 2026-11-06 | First draft: regions (29 front, 28 back), variants, behaviour, accessibility, tokens, Flutter API. |
+| 0.1.1 | 2026-11-10 | Draft 1 artwork in `assets/body/`; target sizes corrected to the measured artwork (ankles and feet are under 24 × 24 dp). |
