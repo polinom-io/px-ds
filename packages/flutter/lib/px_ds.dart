@@ -6,7 +6,7 @@
 /// ThemeData(extensions: PxDsTheme.extensions(PxDsBrand.treatmint, Brightness.light))
 /// ```
 ///
-/// then use the widgets (`PxDsButton`, `PxDsTextField`, `PxDsCheckbox`, `PxDsRadioGroup`, `PxDsSwitch`,
+/// then use the widgets (`PxDsButton`, `PxDsTextField`, `PxDsCheckbox`, `PxDsRadioGroup`, `PxDsSelect`, `PxDsSwitch`,
 /// `showPxDsDialog`, `PxDsCard`, `PxDsAlert`, `PxDsIcon`) or
 /// read the tokens with `Theme.of(context).extension<PxDsColors>()!`.
 library;
@@ -21,6 +21,7 @@ export 'src/widgets/checkbox.dart';
 export 'src/widgets/dialog.dart';
 export 'src/widgets/icon.dart';
 export 'src/widgets/radio_group.dart';
+export 'src/widgets/select.dart';
 export 'src/widgets/switch.dart';
 export 'src/widgets/text_field.dart';
 export 'src/widgets/theme_access.dart' show PxDsTone, PxDsThemeData;
