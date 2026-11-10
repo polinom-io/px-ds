@@ -510,23 +510,25 @@ Reusable page sections for the Polinom.io landing page and the TreatMint product
 
 Until each component has a spec (§7), per-platform progress is tracked here. The Code column in §5.0–§5.10 shows the lowest status across Web and Flutter, so these rows read `—` there.
 
-The 14 React components in the Polinom.io design system (migrated from the 27 Oct system and rebuilt on current tokens) cover **18 inventory rows**, because Field implements six rows.
+The 14 React components in the Polinom.io design system (migrated from the 27 Oct system and rebuilt on current tokens) cover **18 inventory rows**, because Field implements six rows. Flutter has 7 of them built (Button, Field, Checkbox, Switch, Alert, Modal, Card), plus the Radio group and the body outline regions and labels, which are not in the React bundle. Rows with `—` have not started on that platform. Updated 10 Nov 2026 from the code in `packages/`.
 
 | Design-system component | Inventory rows | Web (React) | Flutter |
 |---|---|---|---|
-| Button | ACT-01 | In build | — |
-| Field | INP-16 Form field, INP-01 Text input, INP-02 Text area, INP-03 Select, INP-14 Label, INP-15 Helper / error text | In build | — |
-| Checkbox | INP-05 | In build | — |
-| Switch | INP-07 | In build | — |
+| Button | ACT-01 | In build | In build |
+| Field | INP-16 Form field, INP-01 Text input, INP-02 Text area, INP-03 Select, INP-14 Label, INP-15 Helper / error text | In build | In build (text field, single and multiline; no Select yet) |
+| Checkbox | INP-05 | In build | In build |
+| Switch | INP-07 | In build | In build |
 | Tabs | NAV-03 | In build | — |
-| Alert | FBK-01 | In build | — |
+| Alert | FBK-01 | In build | In build |
 | Progress | FBK-04 | In build | — |
 | Badge | FBK-06 | In build | — |
-| Modal | OVL-01 | In build | — |
-| Card | DSP-01 | In build | — |
+| Modal | OVL-01 | In build | In build (Dialog) |
+| Card | DSP-01 | In build | In build |
 | Table | DSP-02 (Basic only) | In build | — |
 | Stat | DSP-09 | In build | — |
 | Avatar | DSP-04 | In build | — |
+| Radio | INP-06 (Group variant on Flutter) | — | In build |
+| Body outline | INP-19 | — | In build (regions and labels generated; widget not yet built) |
 | CurveDivider | none: a Polinom.io brand ornament, tracked as a LAY-05 Divider variant (LAY-05 itself not started) | In build | Won't do (marketing only) |
 
 The bundle's internal `Icon` helper renders Phosphor icons inside these components; it is not the CNT-02 Icon component.
