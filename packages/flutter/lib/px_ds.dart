@@ -6,7 +6,7 @@
 /// ThemeData(extensions: PxDsTheme.extensions(PxDsBrand.treatmint, Brightness.light))
 /// ```
 ///
-/// then use the widgets (`PxDsButton`, `PxDsTextField`, `PxDsCheckbox`, `PxDsRadioGroup`, `PxDsSwitch`,
+/// then use the widgets (`PxDsButton`, `PxDsTextField`, `PxDsCheckbox`, `PxDsRadioGroup`, `PxDsSelect`, `PxDsSwitch`,
 /// `showPxDsDialog`, `PxDsCard`, `PxDsAlert`, `PxDsIcon`, and the layout primitives `PxDsBox`, `PxDsStack`,
 /// `PxDsGrid`, `PxDsContainer`, `PxDsDivider`, `PxDsVisuallyHidden`) or
 /// read the tokens with `Theme.of(context).extension<PxDsColors>()!`.
@@ -27,6 +27,7 @@ export 'src/widgets/grid.dart';
 export 'src/widgets/icon.dart';
 export 'src/widgets/layout_tokens.dart';
 export 'src/widgets/radio_group.dart';
+export 'src/widgets/select.dart';
 export 'src/widgets/stack.dart';
 export 'src/widgets/switch.dart';
 export 'src/widgets/text_field.dart';
