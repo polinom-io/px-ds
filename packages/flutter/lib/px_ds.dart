@@ -11,6 +11,7 @@
 /// read the tokens with `Theme.of(context).extension<PxDsColors>()!`.
 library;
 
+export 'src/body/body_regions.g.dart';
 export 'src/icons/icons.g.dart';
 export 'src/tokens/tokens.g.dart';
 export 'src/widgets/alert.dart';

@@ -2,7 +2,7 @@
 
 > Component spec, platform-neutral. References like §2.1 point to the design system specification, [`docs/spec.md`](../spec.md).
 
-**Status:** Design ☐ · Docs ☐     **Owner:** core team (spec), Flutter platform lead (build)     **Version:** 0.1.0 (draft, 6 Nov 2026)
+**Status:** Design ☐ · Docs ☐     **Owner:** core team (spec), Flutter platform lead (build)     **Version:** 0.1.1 (draft, 10 Nov 2026)
 
 ### Platform status
 | Platform | Status | Component name in code | Notes / deviations |
@@ -42,7 +42,7 @@ These three screens meet the inclusion rule (spec §2.3: at least 3 distinct scr
 
 ### Artwork
 - **Custom made, owned by the system.** A simple, neutral body form drawn for Polinom.io. It is not traced from a third-party illustration, so no outside licence applies. One drawing per face, front and back, with the same proportions.
-- **Neutral and plain.** No face features, no musculature, no gender cues, no skin colour. Rounded joins, even outline weight. It must read as a body at 160 dp tall and stay calm at full screen.
+- **A pictogram, neutral and plain.** The style of a wayfinding sign: a round head set apart from the body, a short neck, one block for shoulders and torso, and straight arm and leg bars with rounded ends, separated from the torso and from each other by thin slits. No face features, no musculature, no gender cues, no skin colour. Even outline weight. It must read as a body at 160 dp tall and stay calm at full screen.
 - **Built from regions.** Each region is a closed vector shape. The outline of the whole figure is the union of the region shapes, so selections always line up with the drawing.
 - **Source:** one SVG per face in `assets/body/` (`body-front.svg`, `body-back.svg`). Each region is a `<path>` whose `id` is the region id below. The token build generates the Dart paths from these files, as it does for icons (`tools/icons.mjs`), and fails if a region id is missing, duplicated or not in the region list.
 - **Coordinates:** a 200 × 440 viewBox for both faces, centred on the body's midline, so the two faces can be swapped without the figure jumping.
@@ -53,43 +53,70 @@ Names follow side, area, face: "Left knee, front". A region on the midline has n
 
 **Front (29)**
 
-| Id | Label (English) | Id | Label (English) |
-|---|---|---|---|
-| `head-front` | Head, front | `neck-front` | Neck, front |
-| `shoulder-right-front` | Right shoulder, front | `shoulder-left-front` | Left shoulder, front |
-| `chest-right-front` | Right chest, front | `chest-left-front` | Left chest, front |
-| `abdomen-upper-front` | Upper abdomen, front | `abdomen-lower-front` | Lower abdomen, front |
-| `hip-right-front` | Right hip, front | `hip-left-front` | Left hip, front |
-| `groin-front` | Groin, front | | |
-| `upper-arm-right-front` | Right upper arm, front | `upper-arm-left-front` | Left upper arm, front |
-| `elbow-right-front` | Right elbow, front | `elbow-left-front` | Left elbow, front |
-| `forearm-right-front` | Right forearm, front | `forearm-left-front` | Left forearm, front |
-| `hand-right-front` | Right wrist and hand, front | `hand-left-front` | Left wrist and hand, front |
-| `thigh-right-front` | Right thigh, front | `thigh-left-front` | Left thigh, front |
-| `knee-right-front` | Right knee, front | `knee-left-front` | Left knee, front |
-| `shin-right-front` | Right shin, front | `shin-left-front` | Left shin, front |
-| `ankle-right-front` | Right ankle, front | `ankle-left-front` | Left ankle, front |
-| `foot-right-front` | Right foot, front | `foot-left-front` | Left foot, front |
+| Id | Label (English) | Label (Spanish, Chile) |
+|---|---|---|
+| `head-front` | Head, front | Cabeza, parte delantera |
+| `neck-front` | Neck, front | Cuello, parte delantera |
+| `shoulder-right-front` | Right shoulder, front | Hombro derecho, parte delantera |
+| `shoulder-left-front` | Left shoulder, front | Hombro izquierdo, parte delantera |
+| `chest-right-front` | Right chest, front | Pecho derecho, parte delantera |
+| `chest-left-front` | Left chest, front | Pecho izquierdo, parte delantera |
+| `abdomen-upper-front` | Upper abdomen, front | Abdomen superior, parte delantera |
+| `abdomen-lower-front` | Lower abdomen, front | Abdomen inferior, parte delantera |
+| `hip-right-front` | Right hip, front | Cadera derecha, parte delantera |
+| `hip-left-front` | Left hip, front | Cadera izquierda, parte delantera |
+| `groin-front` | Groin, front | Ingle, parte delantera |
+| `upper-arm-right-front` | Right upper arm, front | Brazo derecho, parte delantera |
+| `upper-arm-left-front` | Left upper arm, front | Brazo izquierdo, parte delantera |
+| `elbow-right-front` | Right elbow, front | Codo derecho, parte delantera |
+| `elbow-left-front` | Left elbow, front | Codo izquierdo, parte delantera |
+| `forearm-right-front` | Right forearm, front | Antebrazo derecho, parte delantera |
+| `forearm-left-front` | Left forearm, front | Antebrazo izquierdo, parte delantera |
+| `hand-right-front` | Right wrist and hand, front | Muñeca y mano derecha, parte delantera |
+| `hand-left-front` | Left wrist and hand, front | Muñeca y mano izquierda, parte delantera |
+| `thigh-right-front` | Right thigh, front | Muslo derecho, parte delantera |
+| `thigh-left-front` | Left thigh, front | Muslo izquierdo, parte delantera |
+| `knee-right-front` | Right knee, front | Rodilla derecha, parte delantera |
+| `knee-left-front` | Left knee, front | Rodilla izquierda, parte delantera |
+| `shin-right-front` | Right shin, front | Espinilla derecha, parte delantera |
+| `shin-left-front` | Left shin, front | Espinilla izquierda, parte delantera |
+| `ankle-right-front` | Right ankle, front | Tobillo derecho, parte delantera |
+| `ankle-left-front` | Left ankle, front | Tobillo izquierdo, parte delantera |
+| `foot-right-front` | Right foot, front | Pie derecho, parte delantera |
+| `foot-left-front` | Left foot, front | Pie izquierdo, parte delantera |
 
 **Back (28)**
 
-| Id | Label (English) | Id | Label (English) |
-|---|---|---|---|
-| `head-back` | Head, back | `neck-back` | Neck, back |
-| `shoulder-left-back` | Left shoulder, back | `shoulder-right-back` | Right shoulder, back |
-| `upper-back-left-back` | Left upper back | `upper-back-right-back` | Right upper back |
-| `mid-back-back` | Mid back | | |
-| `lower-back-left-back` | Left lower back | `lower-back-right-back` | Right lower back |
-| `tailbone-back` | Tailbone | | |
-| `buttock-left-back` | Left buttock | `buttock-right-back` | Right buttock |
-| `upper-arm-left-back` | Left upper arm, back | `upper-arm-right-back` | Right upper arm, back |
-| `elbow-left-back` | Left elbow, back | `elbow-right-back` | Right elbow, back |
-| `forearm-left-back` | Left forearm, back | `forearm-right-back` | Right forearm, back |
-| `hand-left-back` | Left wrist and hand, back | `hand-right-back` | Right wrist and hand, back |
-| `thigh-left-back` | Left thigh, back | `thigh-right-back` | Right thigh, back |
-| `knee-left-back` | Left knee, back | `knee-right-back` | Right knee, back |
-| `calf-left-back` | Left calf | `calf-right-back` | Right calf |
-| `heel-left-back` | Left heel | `heel-right-back` | Right heel |
+| Id | Label (English) | Label (Spanish, Chile) |
+|---|---|---|
+| `head-back` | Head, back | Cabeza, parte trasera |
+| `neck-back` | Neck, back | Cuello, parte trasera |
+| `shoulder-left-back` | Left shoulder, back | Hombro izquierdo, parte trasera |
+| `shoulder-right-back` | Right shoulder, back | Hombro derecho, parte trasera |
+| `upper-back-left-back` | Left upper back | Espalda alta izquierda |
+| `upper-back-right-back` | Right upper back | Espalda alta derecha |
+| `mid-back-back` | Mid back | Espalda media |
+| `lower-back-left-back` | Left lower back | Zona lumbar izquierda |
+| `lower-back-right-back` | Right lower back | Zona lumbar derecha |
+| `tailbone-back` | Tailbone | Coxis |
+| `buttock-left-back` | Left buttock | Glúteo izquierdo |
+| `buttock-right-back` | Right buttock | Glúteo derecho |
+| `upper-arm-left-back` | Left upper arm, back | Brazo izquierdo, parte trasera |
+| `upper-arm-right-back` | Right upper arm, back | Brazo derecho, parte trasera |
+| `elbow-left-back` | Left elbow, back | Codo izquierdo, parte trasera |
+| `elbow-right-back` | Right elbow, back | Codo derecho, parte trasera |
+| `forearm-left-back` | Left forearm, back | Antebrazo izquierdo, parte trasera |
+| `forearm-right-back` | Right forearm, back | Antebrazo derecho, parte trasera |
+| `hand-left-back` | Left wrist and hand, back | Muñeca y mano izquierda, parte trasera |
+| `hand-right-back` | Right wrist and hand, back | Muñeca y mano derecha, parte trasera |
+| `thigh-left-back` | Left thigh, back | Muslo izquierdo, parte trasera |
+| `thigh-right-back` | Right thigh, back | Muslo derecho, parte trasera |
+| `knee-left-back` | Left knee, back | Rodilla izquierda, parte trasera |
+| `knee-right-back` | Right knee, back | Rodilla derecha, parte trasera |
+| `calf-left-back` | Left calf | Pantorrilla izquierda |
+| `calf-right-back` | Right calf | Pantorrilla derecha |
+| `heel-left-back` | Left heel | Talón izquierdo |
+| `heel-right-back` | Right heel | Talón derecho |
 
 Areas that exist only on the back (upper, mid and lower back, tailbone, buttocks, calves, heels) drop the word "back" from their label, because it adds nothing. Their ids keep the face so every id has the same shape.
 
@@ -110,7 +137,7 @@ The region list is part of the API: renaming or removing a region is a breaking 
 |---|---|---|---|
 | Small | 160 dp | Display-only in a card or list row | No region labels; selection summary required |
 | Medium | 320 dp | Display-only on a detail screen | Region labels allowed |
-| Large | 440 dp minimum, fills available height | Select (Log pain) | Smallest regions (wrist and hand, ankle, heel) are about 24 × 24 dp at this size; see Behavior for hit areas |
+| Large | 440 dp minimum, fills available height | Select (Log pain) | Every region is at least 24 × 24 dp at this size (smallest: neck, elbows, ankles); see Behavior for hit areas |
 
 Selecting is only allowed at Large. Below 440 dp the hand and foot regions get too small to tap reliably.
 
@@ -141,7 +168,7 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 - **Announcements:** toggling a region announces its new state ("Left knee, front, selected"). Switching face announces "Back view" or "Front view".
 - **Not by colour alone:** a selected region gets a thicker outline as well as a fill, and the selection summary always names every selected region in words. Display-only values always appear as label text, never as shading alone (§6.1).
 - **List alternative:** "Choose from a list" shows the same regions as checkboxes (INP-05), grouped by area (Head and neck, Arms and hands, Torso, Back, Legs and feet), bound to the same selection. This is the equivalent control that keeps small regions within WCAG 2.5.8 (target size) and serves anyone who can't use the figure. It is always available in select mode.
-- **Target size:** smallest regions are about 24 × 24 dp at Large size plus the edge margin, which meets the WCAG 2.2 minimum but not the 44/48 dp touch recommendation (§6). The list alternative covers the gap.
+- **Target size:** at Large size every region is at least 24 × 24 dp, the WCAG 2.2 minimum, so the figure itself conforms; the list alternative is still always offered. None of the regions reach the 44/48 dp touch recommendation (§6).
 - **The figure itself** is excluded from semantics apart from its regions; it has no image description, because the regions and summary carry its meaning.
 
 ### Tokens used
@@ -198,3 +225,4 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 | Version | Date | Change |
 |---|---|---|
 | 0.1.0 | 2026-11-06 | First draft: regions (29 front, 28 back), variants, behaviour, accessibility, tokens, Flutter API. |
+| 0.1.1 | 2026-11-10 | Draft artwork in `assets/body/`, pictogram style; arms, torso and ankle bands sized so every region is at least 24 × 24 dp at Large size. |
