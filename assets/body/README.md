@@ -21,6 +21,6 @@ These files are the source. The token build will turn them into Flutter paths an
 
 ## Draft 1 notes
 
-- Straight-edged, cartoon-like style: every line is a straight segment (octagonal head, four-sided limbs, polygon hands and feet), with sharp mitred joins. Cut into regions along straight lines, so shared edges are exact.
-- Smallest regions at the 440 dp selecting size: front ankles 16 × 18 dp and feet 21 × 22 dp, under the 24 × 24 minimum; elbows, hands and heels are larger (about 19–21 wide, 28–35 tall). The spec relies on the checkbox list for the ankles and feet (WCAG 2.5.8 equivalent-control exception). The review should decide whether that's acceptable or the ankle merges into the foot.
+- Pictogram style, like a wayfinding sign: a round head apart from the body, a short neck stub, one shoulder-and-torso block, straight arm and leg bars with rounded ends, thin slits between arms and torso and between the legs. Cut into regions along straight lines, so shared edges are exact.
+- Every region is at least 24 × 24 dp at the 440 dp selecting size (smallest: neck, elbows, ankles, tailbone). Arms are 24 wide and the torso 72 wide for that reason: narrower bars look closer to a sign but drop regions under the minimum.
 - Not yet checked by the build: that comes with the region build step.
