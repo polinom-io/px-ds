@@ -42,7 +42,7 @@ These three screens meet the inclusion rule (spec §2.3: at least 3 distinct scr
 
 ### Artwork
 - **Custom made, owned by the system.** A simple, neutral body form drawn for Polinom.io. It is not traced from a third-party illustration, so no outside licence applies. One drawing per face, front and back, with the same proportions.
-- **Neutral and plain.** No face features, no musculature, no gender cues, no skin colour. Rounded joins, even outline weight. It must read as a body at 160 dp tall and stay calm at full screen.
+- **Neutral, plain and straight-edged.** A cartoon-like figure drawn with straight segments only (octagonal head, four-sided limbs, polygon hands and feet). No face features, no musculature, no gender cues, no skin colour. Sharp joins, even outline weight. It must read as a body at 160 dp tall and stay calm at full screen.
 - **Built from regions.** Each region is a closed vector shape. The outline of the whole figure is the union of the region shapes, so selections always line up with the drawing.
 - **Source:** one SVG per face in `assets/body/` (`body-front.svg`, `body-back.svg`). Each region is a `<path>` whose `id` is the region id below. The token build generates the Dart paths from these files, as it does for icons (`tools/icons.mjs`), and fails if a region id is missing, duplicated or not in the region list.
 - **Coordinates:** a 200 × 440 viewBox for both faces, centred on the body's midline, so the two faces can be swapped without the figure jumping.
@@ -110,7 +110,7 @@ The region list is part of the API: renaming or removing a region is a breaking 
 |---|---|---|---|
 | Small | 160 dp | Display-only in a card or list row | No region labels; selection summary required |
 | Medium | 320 dp | Display-only on a detail screen | Region labels allowed |
-| Large | 440 dp minimum, fills available height | Select (Log pain) | Smallest regions in draft 1 artwork: ankle 16 × 18 dp, foot 19 × 22, wrist and hand 19 wide; see Behavior for hit areas |
+| Large | 440 dp minimum, fills available height | Select (Log pain) | Smallest regions in draft 1 artwork: ankle 16 × 18 dp, foot 21 × 22, wrist and hand 19 wide; see Behavior for hit areas |
 
 Selecting is only allowed at Large. Below 440 dp the hand and foot regions get too small to tap reliably.
 
@@ -141,7 +141,7 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 - **Announcements:** toggling a region announces its new state ("Left knee, front, selected"). Switching face announces "Back view" or "Front view".
 - **Not by colour alone:** a selected region gets a thicker outline as well as a fill, and the selection summary always names every selected region in words. Display-only values always appear as label text, never as shading alone (§6.1).
 - **List alternative:** "Choose from a list" shows the same regions as checkboxes (INP-05), grouped by area (Head and neck, Arms and hands, Torso, Back, Legs and feet), bound to the same selection. This is the equivalent control that keeps small regions within WCAG 2.5.8 (target size) and serves anyone who can't use the figure. It is always available in select mode.
-- **Target size:** measured on the draft 1 artwork at Large size, the ankles (16 × 18 dp) and feet (19 × 22 dp) are under the WCAG 2.2 minimum of 24 × 24, even with the 8 dp edge margin on the outer side. Conformance rests on the list alternative (WCAG 2.5.8 equivalent-control exception), so it must stay available in select mode. None of the regions reach the 44/48 dp touch recommendation (§6).
+- **Target size:** measured on the draft 1 artwork at Large size, the ankles (16 × 18 dp) and feet (21 × 22 dp) are under the WCAG 2.2 minimum of 24 × 24, even with the 8 dp edge margin on the outer side. Conformance rests on the list alternative (WCAG 2.5.8 equivalent-control exception), so it must stay available in select mode. None of the regions reach the 44/48 dp touch recommendation (§6).
 - **The figure itself** is excluded from semantics apart from its regions; it has no image description, because the regions and summary carry its meaning.
 
 ### Tokens used
