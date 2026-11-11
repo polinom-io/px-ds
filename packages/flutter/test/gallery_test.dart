@@ -111,6 +111,14 @@ void main() {
                 PxDsTab(label: 'Body', content: Text('Where it hurts.'), enabled: false),
               ]),
               const SizedBox(height: 16),
+              const PxDsBodyOutline(
+                label: 'Where it hurt',
+                size: PxDsBodySize.medium,
+                layout: PxDsBodyLayout.sideBySide,
+                selected: {PxDsBodyRegion.kneeLeftFront, PxDsBodyRegion.lowerBackLeftBack},
+                labels: {PxDsBodyRegion.kneeLeftFront: '7/10', PxDsBodyRegion.lowerBackLeftBack: '4/10'},
+              ),
+              const SizedBox(height: 16),
               Wrap(spacing: 12, runSpacing: 12, children: [
                 for (final icon in PxDsIcons.all) PxDsIcon(icon, size: 24, color: c.colorTextDefault),
               ]),
