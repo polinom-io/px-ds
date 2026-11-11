@@ -18,6 +18,7 @@
     { "why": "Status text and icons on any page surface", "min": 4.5, "fg": ["color-feedback-success-fg", "color-feedback-warning-fg", "color-feedback-danger-fg", "color-feedback-info-fg"], "bg": "surfaces" },
     { "why": "Control outlines: inputs, checkbox, radio, switch track; the off switch thumb on its track (1.4.11)", "min": 3, "fg": ["color-border-control", "color-border-strong"], "bg": ["color-surface-page", "color-surface-default", "color-surface-sunken"] },
     { "why": "Focus ring on every surface (2.4.13, 1.4.11)", "min": 3, "fg": ["color-focus-ring"], "bg": "surfaces" },
-    { "why": "Checked switch track and checkbox fill against the page (1.4.11)", "min": 3, "fg": ["color-action-primary-bg"], "bg": ["color-surface-page", "color-surface-default"] }
+    { "why": "Checked switch track and checkbox fill against the page (1.4.11)", "min": 3, "fg": ["color-action-primary-bg"], "bg": ["color-surface-page", "color-surface-default"] },
+    { "why": "Body outline: region outlines and the selected fill against the surfaces the figure sits on, and so against the unselected fill (1.4.11)", "min": 3, "fg": ["color-border-control", "color-border-strong", "color-action-primary-bg"], "bg": ["color-surface-page", "color-surface-sunken", "color-surface-default", "color-surface-raised"] }
   ]
 }

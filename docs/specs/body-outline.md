@@ -8,7 +8,7 @@
 | Platform | Status | Component name in code | Notes / deviations |
 |---|---|---|---|
 | Web (React) — Phase 1 | Won't do | — | No web consumer (spec §2.1). Revisit if a web product needs it. |
-| Mobile (Flutter / Dart) — Phase 1 | In design | `PxDsBodyOutline` | TreatMint is the only consumer. |
+| Mobile (Flutter / Dart) — Phase 1 | In build | `PxDsBodyOutline` | TreatMint is the only consumer. Not yet: the selected fill does not fade in, colliding region labels do not move apart with a leader line, and the Large figure is a fixed 440 dp rather than filling the height it is given. |
 | iOS native (SwiftUI) — Phase 2 | — | `PxDsBodyOutline` | Only if a native product needs it. |
 | Android native (Compose) — Phase 2 | — | `PxDsBodyOutline` | Only if a native product needs it. |
 
@@ -186,7 +186,7 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 | Error | INP-15 Helper / error text |
 | Spacing | `space-2` between figure and summary, `space-4` between toggle and figure |
 
-**Contrast** (checked 6 Nov 2026 with `tools/contrast-check.mjs` against `tokens.json`, all four themes): outline and selected fill both pass 3:1 against `color-surface-sunken`, `-default`, `-raised` and `-page`. `color-focus-ring` fails against `color-action-primary-bg` (1.0 to 2.1:1), so the ring is never drawn on the fill; it sits outside the region on the surface, a pair that already passes. Add these pairs to `tokens/contrast-pairs.json` with the build:
+**Contrast** (checked 6 Nov 2026 with `tools/contrast-check.mjs` against `tokens.json`, all four themes): outline and selected fill both pass 3:1 against `color-surface-sunken`, `-default`, `-raised` and `-page`. `color-focus-ring` fails against `color-action-primary-bg` (1.0 to 2.1:1), so the ring is never drawn on the fill; it sits outside the region on the surface, a pair that already passes. These pairs are in `tokens/contrast-pairs.json` and checked by the build:
 - `color-border-control`, `color-border-strong`, `color-action-primary-bg` on `color-surface-sunken` and the surfaces, at 3:1 (WCAG 1.4.11).
 
 ### API (code)
@@ -226,3 +226,4 @@ Selecting is only allowed at Large. Below 440 dp the hand and foot regions get t
 |---|---|---|
 | 0.1.0 | 2026-11-06 | First draft: regions (29 front, 28 back), variants, behaviour, accessibility, tokens, Flutter API. |
 | 0.1.1 | 2026-11-10 | Draft artwork in `assets/body/`, pictogram style; arms, torso and ankle bands sized so every region is at least 24 × 24 dp at Large size. |
+| 0.2.0 | 2026-11-10 | Flutter widget `PxDsBodyOutline` built; body outline contrast pairs added to `tokens/contrast-pairs.json`. |
