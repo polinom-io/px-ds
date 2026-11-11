@@ -84,6 +84,8 @@ build/
 packages/flutter/pubspec.lock
 # Golden test failures (the approved goldens are committed)
 **/test/**/failures/
+# Widget gallery render (CI regenerates it with --update-goldens; not an approved golden)
+packages/flutter/test/goldens/gallery.png
 
 # Flutter-generated platform files in the gallery app
 **/ios/Flutter/Generated.xcconfig
