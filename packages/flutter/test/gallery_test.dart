@@ -105,6 +105,12 @@ void main() {
                 ]),
               ),
               const SizedBox(height: 16),
+              const PxDsTabs(label: 'Views', tabs: [
+                PxDsTab(label: 'List', content: Text('Entries, newest first.')),
+                PxDsTab(label: 'Chart', content: Text('Intensity over time.')),
+                PxDsTab(label: 'Body', content: Text('Where it hurts.'), enabled: false),
+              ]),
+              const SizedBox(height: 16),
               Wrap(spacing: 12, runSpacing: 12, children: [
                 for (final icon in PxDsIcons.all) PxDsIcon(icon, size: 24, color: c.colorTextDefault),
               ]),
