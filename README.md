@@ -108,17 +108,13 @@ GitHub Packages needs a token to install, even for public packages. It goes in e
 
 ## Releasing
 
-All packages share one version. To release the web package:
+All packages share one version, managed by [release-please](https://github.com/googleapis/release-please). Never bump versions, edit `CHANGELOG.md` or push tags by hand.
 
-1. In a pull request, set `"version"` in `packages/web/package.json` (for example `0.2.0`) and merge it.
-2. Tag that commit on `main` with the same version and push the tag:
-   ```sh
-   git checkout main && git pull
-   git tag v0.2.0 && git push origin v0.2.0
-   ```
-3. The **Release** workflow checks that the tag matches the version and is on `main`, runs the token check, typecheck, tests and build, publishes `@polinom-io/px-ds-react` to GitHub Packages and creates a GitHub release with generated notes.
+1. Merge pull requests to `main` with Conventional Commit titles. `feat` gives a minor bump, `fix` a patch, `!` a breaking change.
+2. release-please keeps a **release PR** open with the next version and the CHANGELOG. It updates `version.txt`, `packages/web/package.json`, `packages/flutter/pubspec.yaml` and the install snippet in `packages/flutter/README.md` together.
+3. Merging the release PR tags `vX.Y.Z` and creates the GitHub release. The **Release** workflow then checks the tag matches the web package version, runs the token check, typecheck, tests and build, and publishes `@polinom-io/px-ds-react` to GitHub Packages.
 
-A tag with a hyphen (`v0.2.0-rc.1`) publishes under the `next` dist-tag and is marked as a pre-release, so `latest` only moves on real releases. Pull requests that touch the package run the same workflow as a dry run and list the package contents in the job summary.
+To force a version, put `Release-As: 0.2.0` in a commit body. A version with a hyphen (`0.2.0-rc.1`) publishes under the `next` dist-tag, so `latest` only moves on real releases. Pull requests that touch the package run the same workflow as a dry run and list the package contents in the job summary.
 
 ## Accessibility
 
