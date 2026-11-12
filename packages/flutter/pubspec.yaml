@@ -1,27 +1,20 @@
 name: px_ds
-description: Polinom.io Design System for Flutter. Design tokens as theme extensions, and the brand fonts.
-version: 0.1.1 # x-release-please-version
+description: >-
+  Polinom.io Design System for Flutter. Design tokens as theme extensions, and
+  the brand fonts.
+version: 0.2.0
 repository: https://github.com/polinom-io/px-ds/tree/main/packages/flutter
-# Installed from a release tag of polinom-io/px-ds, not from pub.dev.
 publish_to: none
-
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
-
+  sdk: '>=3.5.0 <4.0.0'
+  flutter: '>=3.24.0'
 dependencies:
   flutter:
     sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 flutter:
-  # Copied from assets/fonts/ by `node tools/build.mjs`; do not edit here.
-  # Atkinson Hyperlegible Next is one variable font (wght 200-800). Each weight the text roles use is
-  # declared, so Flutter matches it exactly instead of synthesising bold; the generated TextStyles set
-  # the same weight through FontVariation('wght', ...).
   fonts:
     - family: Atkinson Hyperlegible Next
       fonts:
