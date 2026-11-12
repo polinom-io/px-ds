@@ -14,6 +14,7 @@ Polinom.io Design System: one set of design tokens for two brands (Polinom.io an
 - `packages/web/` — `@polinom-io/px-ds-react`, React components; `src/tokens/tokens.css` is generated
 - `packages/flutter/` — `px_ds`; `lib/src/tokens/tokens.g.dart` is generated
 - `assets/fonts/` — Atkinson Hyperlegible Next and Hack, with licences
+- `assets/logos/` — official logo files; trademarks, not MIT. Never edit, redraw or strip their metadata
 - `docs/spec.md` — design system spec (scope, theming, inventory, a11y, governance); `docs/specs/<name>.md` — one spec per component. All specs live here and change by pull request.
 
 ## Commands
