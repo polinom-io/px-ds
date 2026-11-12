@@ -3,8 +3,11 @@
 
 Polinom.io Design System: one set of design tokens for two brands (Polinom.io and TreatMint), light and dark, built into platform packages. See README.md for the full guide.
 
-@.ai/company-public.md
-@.ai/engineering/engineering.md
+## Shared context
+Polinom.io rules are synced into `.ai/` from px-context; edit them there. If your harness has not already loaded them, read these files before any task:
+- `.ai/global.md`
+- `.ai/company-public.md`
+- `.ai/engineering/engineering.md`
 
 <!-- The .ai/ files are synced from polinom-io/px-context. Edit them there, not here. -->
 
