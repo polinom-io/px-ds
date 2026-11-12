@@ -28,5 +28,5 @@ Polinom.io Design System: one set of design tokens for two brands (Polinom.io an
 - Components use semantic tokens only (`color-*`, text roles, `space-*`, `radius-*`, `shadow-*`), never primitives or raw values.
 - Every colour pair a component uses must be in `tokens/contrast-pairs.json` and pass WCAG 2.2 AA in all 4 themes.
 - Never convey meaning with colour alone: status and tone always carry an icon, word or label.
-- Token changes need core-team review. Releases are tags on `main`; don't bump versions or publish by hand.
+- Token changes need core-team review. Releases are made by release-please: merge its release PR. Never bump versions, edit `CHANGELOG.md`, push tags or publish by hand.
 - This repo is public: no internal accounts, people, infrastructure or customer data in code, issues, PRs or commits.

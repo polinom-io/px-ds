@@ -1,18 +1,20 @@
 name: Release
 
-# Publishes @polinom-io/px-ds-react to GitHub Packages and creates a GitHub release.
+# release-please keeps a release PR open on main with the next version and CHANGELOG.
+# Merging it tags vX.Y.Z, creates the GitHub release, and this workflow then publishes
+# @polinom-io/px-ds-react to GitHub Packages. Never bump versions or push tags by hand.
 #
-#   Release:  bump "version" in packages/web/package.json in a pull request, merge it, then
-#             tag main with the same version:  git tag v0.1.0 && git push origin v0.1.0
 #   Dry run:  every pull request that touches the package or this workflow runs everything
-#             except the publish and the release, and shows what would be published.
+#             except the publish, and shows what would be published.
 #
-# One version for every package (spec: lockstep releases). Tags with a hyphen (v0.2.0-rc.1)
-# publish under the npm dist-tag "next" and are marked as pre-releases.
+# One version for every package (spec: lockstep releases); release-please updates the web
+# package.json, the Flutter pubspec and the Flutter README together. A version with a hyphen
+# (set with "Release-As: 0.2.0-rc.1" in a commit body) publishes under the npm dist-tag "next".
+# Publishing runs here, not on the tag: tags made with GITHUB_TOKEN don't trigger workflows.
 
 on:
   push:
-    tags: ['v*.*.*']
+    branches: [main]
   pull_request:
     paths:
       - 'packages/web/**'
@@ -29,19 +31,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  release-please:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write        # tag and GitHub release
+      pull-requests: write   # release PR
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
   web:
     name: Publish @polinom-io/px-ds-react
+    needs: release-please
+    # Dry run on pull requests; real publish only when release-please just created a release.
+    if: ${{ !cancelled() && (github.event_name == 'pull_request' || needs.release-please.outputs.release_created == 'true') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
-      contents: write   # create the GitHub release
+      contents: read
       packages: write   # publish to GitHub Packages
     env:
       DRY_RUN: ${{ github.event_name == 'pull_request' }}
+      TAG: ${{ needs.release-please.outputs.tag_name }}
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0   # needed to confirm the tag is on main
+          ref: ${{ github.event_name == 'push' && needs.release-please.outputs.tag_name || '' }}
 
       - uses: pnpm/action-setup@v4
 
@@ -50,18 +72,12 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - name: Check the tag matches the package version and is on main
+      - name: Check the tag matches the package version
         if: env.DRY_RUN == 'false'
         run: |
-          tag="${GITHUB_REF_NAME#v}"
           version="$(node -p "require('./packages/web/package.json').version")"
-          if [ "$tag" != "$version" ]; then
-            echo "::error::Tag v$tag does not match packages/web/package.json version $version. Bump the version in a pull request first."
-            exit 1
-          fi
-          git fetch --quiet origin main
-          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
-            echo "::error::Tag v$tag points to a commit that is not on main. Tag a commit on main."
+          if [ "${TAG#v}" != "$version" ]; then
+            echo "::error::Tag $TAG does not match packages/web/package.json version $version. Check release-please-config.json extra-files."
             exit 1
           fi
 
@@ -93,13 +109,6 @@ jobs:
         run: |
           # pnpm 12 reads credentials only from the user config, never from the repository's .npmrc.
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-          case "$GITHUB_REF_NAME" in *-*) dist_tag=next ;; *) dist_tag=latest ;; esac
+          case "$TAG" in *-*) dist_tag=next ;; *) dist_tag=latest ;; esac
           pnpm publish --no-git-checks --access public --tag "$dist_tag"
 
-      - name: Create the GitHub release
-        if: env.DRY_RUN == 'false'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          case "$GITHUB_REF_NAME" in *-*) pre=--prerelease ;; *) pre= ;; esac
-          gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes --verify-tag $pre
