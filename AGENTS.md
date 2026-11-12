@@ -3,8 +3,8 @@
 
 Polinom.io Design System: one set of design tokens for two brands (Polinom.io and TreatMint), light and dark, built into platform packages. See README.md for the full guide.
 
-@.ai/public-company.md
-@.ai/engineering.md
+@.ai/company-public.md
+@.ai/engineering/engineering.md
 
 <!-- The .ai/ files are synced from polinom-io/px-context. Edit them there, not here. -->
 
