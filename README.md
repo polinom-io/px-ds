@@ -16,7 +16,8 @@ px-ds/
 ├── packages/
 │   ├── web/                 @polinom-io/px-ds-react: 14 React components, src/tokens/tokens.css (generated)
 │   └── flutter/             px_ds: tokens as ThemeExtensions (lib/src/tokens/tokens.g.dart) and fonts (assets/fonts), generated
-└── assets/fonts/            Atkinson Hyperlegible Next, Hack (woff2 + ttf) and their licences
+├── assets/fonts/            Atkinson Hyperlegible Next, Hack (woff2 + ttf) and their licences
+└── assets/logos/            Polinom.io logo files (SVG + PNG); trademarks, not MIT
 ```
 
 Planned next: Flutter widgets in `packages/flutter` (the package itself holds tokens and fonts today), an Astro playground and a Flutter gallery under `apps/`. iOS and Android come in Phase 2.
@@ -138,4 +139,4 @@ The core team (core@polinom.io) owns tokens, tools and the web package, and revi
 
 ## Licence
 
-[MIT](LICENSE), © 2026 Polinom.io. The fonts in `assets/fonts/` keep their own licences: SIL Open Font License 1.1 for Atkinson Hyperlegible Next, MIT with the Bitstream Vera licence for Hack.
+[MIT](LICENSE), © 2026 Polinom.io. The fonts in `assets/fonts/` keep their own licences: SIL Open Font License 1.1 for Atkinson Hyperlegible Next, MIT with the Bitstream Vera licence for Hack. The logos in `assets/logos/` are trademarks of Polinom.io SpA and are not covered by the MIT licence.
