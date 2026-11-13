@@ -14,7 +14,7 @@ dependencies:
     git:
       url: https://github.com/polinom-io/px-ds.git
       path: packages/flutter
-      ref: v0.2.0 # x-release-please-version
+      ref: v0.2.1 # x-release-please-version
 ```
 
 ## Use
