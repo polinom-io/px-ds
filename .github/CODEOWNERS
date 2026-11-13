@@ -1,33 +1,33 @@
 # Code owners (spec §10). The last matching pattern wins, so broad rules come first.
 #
-# Today px-core owns everything. When more teams exist, replace @polinom-io/px-core per line:
+# Today one person owns everything. When teams exist, replace @mvrioe per line:
 # a core team for tokens, tools, assets, web and decisions; the mobile team plus
 # core for Flutter; the mobile team for iOS and Android. A team must have write
 # access to this repo before GitHub accepts it here.
 
 # Fallback: anything not listed below
-*                         @polinom-io/px-core
+*                         @mvrioe
 
 # Token sources, build tools and shared assets: every change
-/tokens/                  @polinom-io/px-core
-/tools/                   @polinom-io/px-core
-/assets/                  @polinom-io/px-core
+/tokens/                  @mvrioe
+/tools/                   @mvrioe
+/assets/                  @mvrioe
 
 # Web package and its playground
-/packages/web/            @polinom-io/px-core
-/apps/astro-playground/   @polinom-io/px-core
+/packages/web/            @mvrioe
+/apps/astro-playground/   @mvrioe
 
 # Flutter package and its gallery: mobile team for API changes, core for specs and accessibility
-/packages/flutter/        @polinom-io/px-core
-/apps/flutter-gallery/    @polinom-io/px-core
+/packages/flutter/        @mvrioe
+/apps/flutter-gallery/    @mvrioe
 
 # Phase 2 native packages
-/packages/ios/            @polinom-io/px-core
-/packages/android/        @polinom-io/px-core
-/Package.swift            @polinom-io/px-core
+/packages/ios/            @mvrioe
+/packages/android/        @mvrioe
+/Package.swift            @mvrioe
 
 # Repo settings, CI and release
-/.github/                 @polinom-io/px-core
+/.github/                 @mvrioe
 
 # Decision records
-/docs/decisions/          @polinom-io/px-core
+/docs/decisions/          @mvrioe
