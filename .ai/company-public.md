@@ -1,4 +1,4 @@
-<!-- px-context v1.2.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.3.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Polinom.io — public company facts
