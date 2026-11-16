@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/polinom-io/px-ds/compare/v0.2.0...v0.2.1) (2026-11-13)
+
+
+### Reverts
+
+* use user handles as code owners again ([#35](https://github.com/polinom-io/px-ds/issues/35)) ([c95e31a](https://github.com/polinom-io/px-ds/commit/c95e31a4dbed0a21408e4ac952992b91afd6d6eb))
+
 ## [0.2.0](https://github.com/polinom-io/px-ds/compare/v0.1.1...v0.2.0) (2026-11-12)
 
 

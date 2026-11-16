@@ -2,7 +2,7 @@ name: px_ds
 description: >-
   Polinom.io Design System for Flutter. Design tokens as theme extensions, and
   the brand fonts.
-version: 0.2.0
+version: 0.2.1
 repository: https://github.com/polinom-io/px-ds/tree/main/packages/flutter
 publish_to: none
 environment:
