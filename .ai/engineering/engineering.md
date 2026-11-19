@@ -1,4 +1,4 @@
-<!-- px-context v1.3.1. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.4.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -19,6 +19,13 @@
 - Types: feat, fix, perf, refactor, docs, test, build, ci, chore, style, revert. `!` or `BREAKING CHANGE:` = major.
 - Squash-merge only. The PR title must be a valid conventional commit; branch commits are free-form.
 - One logical change per PR. If the title needs "and", split it.
+
+## Branches
+
+- `main` is the only long-lived branch. Never create `develop`, `qa`, `staging` or `release` branches, or merge one branch into another to promote changes.
+- Work branches are short-lived (days, not weeks), named `<type>/<slug>` with a Conventional Commits type, and deleted on merge. The org blocks branch names with other prefixes.
+- Releases are release-please tags cut from `main`; environments deploy from `main` through GitHub environments, never from a branch per environment.
+- Repos allow squash merge only (merge commits and rebase merges off), with the PR title as the squash commit title.
 
 ## Commit signing
 
