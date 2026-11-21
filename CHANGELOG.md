@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/polinom-io/px-ds/compare/v0.2.1...v0.2.2) (2026-11-21)
+
+
+### Bug Fixes
+
+* **release:** anchor release-please on 0.2.1 commit ([#2](https://github.com/polinom-io/px-ds/issues/2)) ([2b3328a](https://github.com/polinom-io/px-ds/commit/2b3328aa6a1cd4573bd1fc5c13ba35aaf3d49c89))
+
 ## [0.2.1](https://github.com/polinom-io/px-ds/compare/v0.2.0...v0.2.1) (2026-11-13)
 
 
