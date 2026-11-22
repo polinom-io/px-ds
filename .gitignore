@@ -140,3 +140,6 @@ tmp/
 
 # Claude Code worktrees (parallel agent sessions, see .ai/engineering/engineering.md)
 .claude/worktrees/
+
+# fvm's per-project SDK link (the version itself is pinned in packages/flutter/.fvmrc)
+.fvm/

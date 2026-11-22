@@ -24,7 +24,7 @@ Polinom.io rules are synced into `.ai/` from px-context; edit them there. If you
 - Node: version in `.nvmrc` (`nvm use`); package manager pnpm
 - Tokens: `node tools/build.mjs` (regenerate + all checks), `node tools/build.mjs --check` (fail if generated files are stale)
 - Web: `pnpm install --frozen-lockfile`, then `pnpm --filter @polinom-io/px-ds-react typecheck|test|build`
-- Flutter (in `packages/flutter`): `flutter pub get`, `flutter analyze`, `flutter test --exclude-tags gallery`
+- Flutter (in `packages/flutter`, SDK pinned in `.fvmrc`): `fvm install`, then `fvm flutter pub get`, `fvm flutter analyze`, `fvm flutter test --exclude-tags gallery`
 
 ## Rules
 - Never edit generated files (`tokens.css`, `tokens.g.dart`). Change `tokens/*.json`, run the build, commit both.
