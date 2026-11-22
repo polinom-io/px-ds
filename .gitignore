@@ -137,3 +137,6 @@ captures/
 *.log
 tmp/
 .tmp/
+
+# Claude Code worktrees (parallel agent sessions, see .ai/engineering/engineering.md)
+.claude/worktrees/
