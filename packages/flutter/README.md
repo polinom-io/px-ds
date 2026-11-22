@@ -55,7 +55,8 @@ Atkinson Hyperlegible Next (variable, 200–800, roman and italic) and Hack (reg
 ## Develop
 
 ```sh
-flutter pub get
-flutter analyze
-flutter test
+fvm install          # the Flutter version in .fvmrc
+fvm flutter pub get
+fvm flutter analyze
+fvm flutter test
 ```
