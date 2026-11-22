@@ -1,4 +1,4 @@
-<!-- px-context v1.7.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.8.1. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -33,6 +33,7 @@
 - A branch is checked out in one worktree at a time (git enforces it). Before pushing, rename the worktree branch to `<type>/<slug>` (`git branch -m`): the org blocks other prefixes, including Claude Code's default `worktree-<name>`.
 - Disk: worktrees share the repo's object store, so each costs only its checkout plus dependencies. Install with pnpm (shared store, hard links) and fvm's shared SDK cache; never copy `node_modules` or build output between worktrees.
 - Never list secrets in `.worktreeinclude`; set up each worktree's environment the same way as the main checkout.
+- Start each session in the root folder of the repo the work belongs to (a worktree of it under `.claude/worktrees/` counts; in a monorepo, the root, not a subfolder), so that repo's AGENTS.md, `.ai/` rules and settings load. Read-only queries across repos are fine from any session; to change another repo, hand off a prompt to a session in that repo, or for a one-line mechanical change use a worktree of it after reading its AGENTS.md. Org-wide work runs from the infrastructure repo.
 - Remove a worktree when its PR merges (`git worktree remove <path>`, then `git worktree prune`); keep at most 3 per repo.
 
 ## Commit signing
