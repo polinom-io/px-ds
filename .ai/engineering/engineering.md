@@ -1,4 +1,4 @@
-<!-- px-context v1.5.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.6.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -26,6 +26,14 @@
 - Work branches are short-lived (days, not weeks), named `<type>/<slug>` with a Conventional Commits type, and deleted on merge. The org blocks branch names with other prefixes.
 - Releases are release-please tags cut from `main`; environments deploy from `main` through GitHub environments, never from a branch per environment.
 - Repos allow squash merge only (merge commits and rebase merges off), with the PR title as the squash commit title.
+
+## Parallel agent sessions
+
+- One agent session per working folder. A second session on the same repo runs in its own git worktree (Claude Code: `claude --worktree <slug>`, created under `.claude/worktrees/`, which must be gitignored). Never a second clone, and never switch branches in a folder another session is using.
+- A branch is checked out in one worktree at a time (git enforces it). Before pushing, rename the worktree branch to `<type>/<slug>` (`git branch -m`): the org blocks other prefixes, including Claude Code's default `worktree-<name>`.
+- Disk: worktrees share the repo's object store, so each costs only its checkout plus dependencies. Install with pnpm (shared store, hard links) and fvm's shared SDK cache; never copy `node_modules` or build output between worktrees.
+- Never list secrets in `.worktreeinclude`; set up each worktree's environment the same way as the main checkout.
+- Remove a worktree when its PR merges (`git worktree remove <path>`, then `git worktree prune`); keep at most 3 per repo.
 
 ## Commit signing
 
