@@ -10,10 +10,10 @@ name: Release
 # One version for every package (spec: lockstep releases); release-please updates the web
 # package.json, the Flutter pubspec and the Flutter README together. A version with a hyphen
 # (set with "Release-As: 0.2.0-rc.1" in a commit body) publishes under the npm dist-tag "next".
-# release-please authenticates with the org GitHub App polinomio-release-please (setup:
-# px-infra github/apps/release-please.md), so CI runs on release PRs without approval.
-# Publishing runs here, gated on release_created. Tags and releases made with the App token
-# DO trigger other workflows, so add no workflow on release or tags that repeats it.
+# release-please authenticates with the org GitHub App token, so checks run on release PRs
+# without approval. Publishing runs here, gated on release_created. Tags and releases made
+# with the App token DO trigger other workflows, so add no workflow on release or tags that
+# repeats the publish.
 
 on:
   push:
