@@ -1,4 +1,4 @@
-<!-- px-context v1.8.1. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.9.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Node.js, TypeScript and JavaScript
@@ -27,4 +27,5 @@ Applies to web apps and sites (Astro + React), serverless backends and shared np
 ## Supply chain
 - Before adding a dependency: it exists on the official registry under the expected name, is maintained, and its install scripts are understood. Ask before adding one.
 - Dependabot proposes updates as PRs; review them like any change.
+- GitHub creates no Dependabot alerts or security updates for pnpm 12 lockfiles, so CI runs `pnpm audit --audit-level high` (dev dependencies included) on PRs that change `package.json`, `pnpm-lock.yaml` or `pnpm-workspace.yaml`, on every push to `main` and weekly (`schedule`).
 - Publish only to GitHub Packages under `@polinom-io`, from GitHub Actions (see `engineering.md`, Releases).
