@@ -1,0 +1,39 @@
+# Weekly version updates. Minor and patch updates are grouped per ecosystem;
+# majors get their own PR. Titles follow Conventional Commits.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /            # scans .github/workflows
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+      include: scope        # ci(deps): bump …
+    groups:
+      actions-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: npm  # pnpm uses the npm ecosystem
+    directory: /            # pnpm workspace root (pnpm-workspace.yaml, pnpm-lock.yaml)
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: build
+      include: scope        # build(deps): bump …
+    groups:
+      npm-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
+
+  - package-ecosystem: pub
+    directory: /packages/flutter
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: build
+      include: scope
+    groups:
+      pub-minor-patch:
+        patterns: ["*"]
+        update-types: [minor, patch]
