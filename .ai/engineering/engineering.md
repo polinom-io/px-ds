@@ -1,4 +1,4 @@
-<!-- px-context v1.6.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.7.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -59,6 +59,10 @@
 - GitHub Actions only. Secrets in org/repo secrets, never in workflow files.
 - Workflows that commit or open PRs use `GITHUB_TOKEN` or a GitHub App token with signed commits (e.g. `sign-commits: true` in `peter-evans/create-pull-request`), never a personal access token: commits made with a personal token are unsigned and get blocked.
 - Cloud deploys use OIDC (`id-token: write`), not long-lived keys.
+
+## Tech stacks
+
+- Every repo declares its stacks as GitHub topics (`stack-<name>`); the sync copies only those stack files into `.ai/engineering/tech-stacks/`. Read the ones present before working in a repo, starting with `tech-stacks.md`.
 
 ## Code style
 - Lint/format with the shared configs (today the legacy `@polinom.io/eslint-config` and `@polinom.io/prettier-config`; `@polinom-io/*` once republished); don't restate their rules.
