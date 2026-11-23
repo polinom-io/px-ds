@@ -43,10 +43,10 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+      - uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         id: app-token
         with:
-          app-id: ${{ vars.PX_RELEASE_PLEASE_APP_ID }}
+          client-id: ${{ vars.PX_RELEASE_PLEASE_APP_CLIENT_ID }}
           private-key: ${{ secrets.PX_RELEASE_PLEASE_APP_PRIVATE_KEY }}
           permission-contents: write
           permission-pull-requests: write
