@@ -1,0 +1,22 @@
+name: security
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Secret scanning and OSV dependency scanning. Complements audit.yml (pnpm audit), doesn't replace it.
+  security:
+    uses: polinom-io/px-workflows-public/.github/workflows/security.yml@2e306475fe0169aa85e7f23057401ad4718e26f5 # v0.4.0
+    permissions:
+      contents: read
