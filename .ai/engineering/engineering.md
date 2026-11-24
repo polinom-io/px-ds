@@ -1,4 +1,4 @@
-<!-- px-context v1.9.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Engineering standards
@@ -47,7 +47,7 @@
 
 ## Releases
 
-- Every repo releases with release-please (`googleapis/release-please-action@v4`) using `release-please-config.json` and `.release-please-manifest.json`, with `include-component-in-tag: false` so tags are `vX.Y.Z`. It keeps a release PR open with the version bump and CHANGELOG; merging it tags, creates the GitHub release and triggers publishing. Only `feat`, `fix`, `perf`, `revert` and breaking changes produce a release; `docs`, `chore`, `ci` and the rest don't.
+- Every repo releases with release-please (`googleapis/release-please-action@v4`) using `release-please-config.json` and `.release-please-manifest.json`, with `include-component-in-tag: false` so tags are `vX.Y.Z`. It keeps a release PR open with the version bump and CHANGELOG; merging it tags, creates the GitHub release and triggers publishing. Only `feat`, `fix`, `perf`, `revert` and breaking changes produce a release; `docs`, `chore`, `ci` and the rest don't. New repos start with `"initial-version": "0.1.0"` and `"bump-minor-pre-major": true` in `release-please-config.json`; without them the first release, or the first `feat!:` on 0.x, is 1.0.0. Going to 1.0.0 is a deliberate `Release-As: 1.0.0` commit.
 - Never bump versions, edit `CHANGELOG.md`, push tags or create GitHub releases by hand. To force a version, put `Release-As: x.y.z` in a commit body.
 - release-please authenticates with the org's GitHub App installation token (`actions/create-github-app-token`), never `GITHUB_TOKEN` or a personal token. Its `release-please--**` branches are the only ones it may force-push; never force-push them by hand.
 - Agents never approve workflow runs or re-run a workflow to get past an approval gate: ask a human with write access.
@@ -60,6 +60,7 @@
 - GitHub Actions only. Secrets in org/repo secrets, never in workflow files.
 - Workflows that commit or open PRs use `GITHUB_TOKEN` or a GitHub App token with signed commits (e.g. `sign-commits: true` in `peter-evans/create-pull-request`), never a personal access token: commits made with a personal token are unsigned and get blocked.
 - Cloud deploys use OIDC (`id-token: write`), not long-lived keys.
+- Reusable workflow first: before adding any workflow to a repo, decide whether it belongs in the org's shared workflow repos. If a shared workflow covers the job, call it pinned by full commit SHA with a `# vX.Y.Z` comment instead of copying it. If the job is generic (stack CI, release, audits, security scans) and none covers it yet, create it there first, then call it; never copy it into the repo "for now". A workflow that stays local says why in its PR (repo-specific logic). Pass each secret explicitly, never `secrets: inherit`.
 
 ## Tech stacks
 
