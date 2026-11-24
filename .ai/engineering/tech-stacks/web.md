@@ -1,6 +1,5 @@
-<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
 
-<!-- px-context:visibility=public -->
 # Web: Astro, React, TypeScript and CSS
 
 The default web stack is Astro + React islands + TypeScript + CSS with px-ds tokens, for apps and sites alike, instrumented with OpenTelemetry. TypeScript, Node and pnpm rules are in `node-typescript.md`.

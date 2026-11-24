@@ -1,6 +1,5 @@
-<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
 
-<!-- px-context:visibility=public -->
 # Polinom.io — global defaults
 
 Loaded on every Polinom.io laptop by `scripts/setup-ai-context.sh`. Keep it under 40 lines.
