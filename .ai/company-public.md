@@ -1,6 +1,5 @@
-<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
 
-<!-- px-context:visibility=public -->
 # Polinom.io — public company facts
 
 Safe to publish. Synced to public repos instead of `company-internal.md`.

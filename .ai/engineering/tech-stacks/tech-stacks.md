@@ -1,6 +1,5 @@
-<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
 
-<!-- px-context:visibility=public -->
 # Tech stacks
 
 Before working in a repo, read the stack files present in its `.ai/engineering/tech-stacks/`: the sync copies only the ones matching the repo's `stack-*` topics (see Declaring stacks). Rules in `engineering.md` apply to every stack; these files add only what is specific to one.
