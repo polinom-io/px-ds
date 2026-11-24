@@ -1,4 +1,4 @@
-<!-- px-context v1.9.0. Synced from polinom-io/px-context; edit it there, not here. -->
+<!-- px-context v1.12.0. Synced from polinom-io/px-context; edit it there, not here. -->
 
 <!-- px-context:visibility=public -->
 # Polinom.io — global defaults
