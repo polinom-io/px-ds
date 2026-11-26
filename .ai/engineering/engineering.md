@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.21.0. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.23.0. Managed centrally; don't edit it here. -->
 
 # Engineering standards
 
@@ -11,6 +11,8 @@
   - .ai folder with
     - project-overview.md (repo-owned, not synced: what the product does, users, architecture)
     - business-rules.md (repo-owned, not synced: domain rules the code must keep)
+
+- `.gitignore` = the template's generic part + one block per declared `stack-*` topic, pasted from the template's `gitignore/<stack>.gitignore` above the secrets block, which stays last. No `!` lines except `!*.example` after the secrets header. Existing repos add their block when next touched.
 
 - Load `.ai/` context lazily. CLAUDE.md @-imports only `.ai/global.md`, `.ai/engineering/engineering.md` (commit, signing and branch rules apply to almost every session) and, in private repos, `.ai/data-and-security.md`. AGENTS.md lists the other `.ai/` files, each with a "read when" trigger, and you read a file when its trigger applies:
   - `project-overview.md`: before planning, scoping or explaining work in this repo.
@@ -81,6 +83,12 @@
 - Cloud deploys use OIDC (`id-token: write`), not long-lived keys.
 - Reusable workflow first: before adding any workflow to a repo, decide whether it belongs in the org's shared workflow repos. If a shared workflow covers the job, call it pinned by full commit SHA with a `# vX.Y.Z` comment instead of copying it. If the job is generic (stack CI, release, audits, security scans) and none covers it yet, create it there first, then call it; never copy it into the repo "for now". A workflow that stays local says why in its PR (repo-specific logic). Pass each secret explicitly, never `secrets: inherit`.
 - Security scans: every repo calls the org's shared `security.yml` on pull requests, on push to `main` and on the org cadence, `cron: "0 6 * * 1"` (weekly, Monday 06:00 UTC). Don't pick another schedule.
+
+## Human setup steps
+- When you ask a human to create a secret, token, key, account setting or cloud resource, ship a setup script in the repo that owns it, plus a README section, not bare console steps.
+- The script does everything the API allows. For each manual part it prints the exact console steps, the direct URL and the permission to set on each field.
+- The script reads secrets with hidden input (`read -s`) and passes them on stdin (e.g. `gh secret set NAME` reading stdin), never as arguments, files or output.
+- Exception: a one-off manual step the API can't do (a UI toggle) needs no script; give its direct URL and note it in the README.
 
 ## Tech stacks
 
