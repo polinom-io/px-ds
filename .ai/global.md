@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.21.0. Managed centrally; don't edit it here. -->
 
 # Polinom.io — global defaults
 
@@ -12,4 +12,4 @@ Loaded on every Polinom.io laptop by `scripts/setup-ai-context.sh`. Keep it unde
 - **Personal data (Ley 21.719):** never put real personal data (names with RUT, emails, phones, customer records) into prompts, fixtures or logs. Use synthetic data. If a task needs real personal data, stop and ask.
 - **Stop and ask a human before:** deleting data, running migrations against shared environments, `npm publish`, changing DNS or email records, force-pushing.
 - **Public repos:** never copy internal context (accounts, people, infrastructure, risks, data rules) into a public repo, issue or PR. Files marked `visibility=internal` stay in private repos.
-- **Accounts:** company accounts only (Claude Team seat, Google Workspace). No personal AI accounts for Polinom.io work.
+- **Accounts:** Polinom.io-approved accounts only: Google Workspace, and Claude Pro (Mario) until the first hire, then a Claude Team seat. No other personal AI accounts for Polinom.io work.
