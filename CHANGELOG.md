@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/polinom-io/px-ds/compare/v0.2.2...v0.3.0) (2026-11-26)
+
+
+### Features
+
+* **web:** let Button render a link when given href ([#41](https://github.com/polinom-io/px-ds/issues/41)) ([48e35d3](https://github.com/polinom-io/px-ds/commit/48e35d3bb6fb02f28fac8344e3f4e6a8296ab7c2))
+
 ## [0.2.2](https://github.com/polinom-io/px-ds/compare/v0.2.1...v0.2.2) (2026-11-21)
 
 
