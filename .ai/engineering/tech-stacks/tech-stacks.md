@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.21.0. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.23.0. Managed centrally; don't edit it here. -->
 
 # Tech stacks
 
