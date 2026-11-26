@@ -15,9 +15,9 @@ export function Avatar({ initials, name, tone, size = 'md' }: AvatarProps) {
 		<span
 			className={cx('px-avatar', `px-avatar--${size}`)}
 			style={toneStyle(tone)}
-			role={name ? 'img' : undefined}
-			aria-label={name}
-			aria-hidden={name ? undefined : true}
+			{...(name
+				? { role: 'img', 'aria-label': name }
+				: { 'aria-hidden': true })}
 		>
 			{initials}
 		</span>

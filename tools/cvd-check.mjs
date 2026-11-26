@@ -134,7 +134,7 @@ export function cvdCheck(T) {
 			};
 			for (const [group, cols] of Object.entries(sets)) {
 				const keys = Object.keys(cols);
-				keys.forEach((a, i) =>
+				keys.forEach((a, i) => {
 					keys.slice(i + 1).forEach((b) => {
 						const r = {
 							brand: label,
@@ -150,8 +150,8 @@ export function cvdCheck(T) {
 								toLab(simulate(hex2rgb(cols[b]), kind)),
 							);
 						rows.push(r);
-					}),
-				);
+					});
+				});
 			}
 		}
 	}
