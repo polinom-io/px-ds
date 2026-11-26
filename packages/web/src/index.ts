@@ -8,7 +8,12 @@ export {
 } from './components/Alert/index.js';
 export { Avatar, type AvatarProps } from './components/Avatar/index.js';
 export { Badge, type BadgeProps } from './components/Badge/index.js';
-export { Button, type ButtonProps } from './components/Button/index.js';
+export {
+	Button,
+	type ButtonAsButtonProps,
+	type ButtonAsLinkProps,
+	type ButtonProps,
+} from './components/Button/index.js';
 export { Card, type CardProps } from './components/Card/index.js';
 export { Checkbox, type CheckboxProps } from './components/Checkbox/index.js';
 export {
