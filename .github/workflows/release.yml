@@ -92,6 +92,13 @@ jobs:
             exit 1
           fi
 
+      # pnpm 12 reads registry credentials only from the user config. GITHUB_TOKEN reads
+      # @polinom-io packages (Biome config) with packages: read.
+      - name: Authenticate to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+
       - run: pnpm install --frozen-lockfile
 
       # The same gates as CI, so nothing reaches the registry that main would reject.
