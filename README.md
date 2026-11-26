@@ -2,7 +2,7 @@
 
 One design system for two brands, **Polinom.io** and **TreatMint**, in light and dark mode, on the web (React, used from Astro) and Flutter, with native iOS and Android to follow.
 
-> **Status: Phase 1, in build.** Nothing is published yet. This repository holds the design tokens, the build that turns them into platform files, the fonts, and the React components (`packages/web`, in build). Flutter widgets come next.
+> **Status: Phase 1, in build.** `@polinom-io/px-ds-react` is published to GitHub Packages (see [Releases](https://github.com/polinom-io/px-ds/releases)); the Flutter package `px_ds` is not published yet. This repository holds the design tokens, the build that turns them into platform files, the fonts, and the React components (`packages/web`). Flutter widgets come next.
 
 ## What's here
 
