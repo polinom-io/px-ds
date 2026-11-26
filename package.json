@@ -17,5 +17,9 @@
     "check": "node tools/build.mjs --check",
     "contrast": "node tools/contrast-check.mjs tokens/tokens.json tokens/contrast-pairs.json",
     "cvd": "node tools/cvd-check.mjs tokens/tokens.json"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.8",
+    "@polinom-io/biome-config": "0.1.0"
   }
 }

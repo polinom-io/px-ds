@@ -1,0 +1,14 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"extends": ["@polinom-io/biome-config/biome"],
+	"files": {
+		"includes": [
+			"**",
+			"!**/.ai",
+			"!**/CHANGELOG.md",
+			"!**/.release-please-manifest.json",
+			"!packages/web/src/tokens/tokens.css",
+			"!packages/flutter"
+		]
+	}
+}
