@@ -1,3 +1,10 @@
 /* CurveDivider: every value is a token from tokens.css; nothing here is theme-specific. */
-.px-curve { width: 100%; }
-.px-curve svg { display: block; width: 100%; height: auto; overflow: visible; }
+.px-curve {
+	width: 100%;
+}
+.px-curve svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: visible;
+}

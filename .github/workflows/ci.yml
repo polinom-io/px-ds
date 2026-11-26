@@ -45,6 +45,9 @@ jobs:
     name: Web package (typecheck, test, build)
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -56,7 +59,15 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
 
+      # pnpm 12 reads registry credentials only from the user config. GITHUB_TOKEN reads
+      # @polinom-io packages (Biome config) with packages: read.
+      - name: Authenticate to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+
       - run: pnpm install --frozen-lockfile
+      - run: pnpm biome ci .
       - run: pnpm --filter @polinom-io/px-ds-react typecheck
       # Server render with no DOM, hydration as separate islands, axe-core, behaviour, stylesheet checks.
       - run: pnpm --filter @polinom-io/px-ds-react test
