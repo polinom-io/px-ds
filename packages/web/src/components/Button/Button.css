@@ -9,6 +9,7 @@
 	border: var(--border-width-hairline) solid transparent;
 	border-radius: var(--radius-md);
 	font: var(--text-label-md);
+	text-decoration: none;
 	cursor: pointer;
 	transition:
 		background-color var(--motion-duration-fast) var(--motion-easing-enter),

@@ -36,6 +36,11 @@ export const fixtures: Record<string, ReactElement> = {
 			Start a project
 		</Button>
 	),
+	ButtonLink: (
+		<Button href="#contact" variant="secondary">
+			See our approach
+		</Button>
+	),
 	Card: (
 		<Card tone="quaternary" exponent="x³" title="Strategy">
 			The highest-degree term.

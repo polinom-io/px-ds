@@ -5,9 +5,11 @@ import {
 	render,
 	screen,
 } from '@testing-library/react';
+import { createRef } from 'react';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import {
 	Alert,
+	Button,
 	Field,
 	Modal,
 	Progress,
@@ -185,5 +187,90 @@ describe('Switch', () => {
 		expect((sw as HTMLInputElement).checked).toBe(true);
 		fireEvent.click(sw);
 		expect((sw as HTMLInputElement).checked).toBe(false);
+	});
+});
+
+describe('Button', () => {
+	it('renders a button by default, with type="button"', () => {
+		render(<Button>Save changes</Button>);
+		const button = screen.getByRole('button', { name: 'Save changes' });
+		expect(button.tagName).toBe('BUTTON');
+		expect(button.getAttribute('type')).toBe('button');
+	});
+
+	it('renders a link with native link semantics when given href', () => {
+		render(
+			<Button href="#contact" variant="secondary" size="lg">
+				Start a project
+			</Button>,
+		);
+		const link = screen.getByRole('link', { name: 'Start a project' });
+		expect(link.tagName).toBe('A');
+		expect(link.getAttribute('href')).toBe('#contact');
+		expect(link.hasAttribute('type')).toBe(false);
+		expect(link.className).toBe('px-btn px-btn--secondary px-btn--lg');
+		expect(screen.queryByRole('button')).toBeNull();
+	});
+
+	it('passes native attributes through to the button', () => {
+		render(
+			<Button
+				aria-label="Close"
+				aria-expanded={false}
+				name="intent"
+				value="close"
+				data-testid="b"
+			>
+				×
+			</Button>,
+		);
+		const button = screen.getByRole('button', { name: 'Close' });
+		expect(button.getAttribute('aria-expanded')).toBe('false');
+		expect(button.getAttribute('name')).toBe('intent');
+		expect(button.getAttribute('value')).toBe('close');
+		expect(button.dataset.testid).toBe('b');
+	});
+
+	it('passes native attributes through to the link', () => {
+		render(
+			<Button href="/docs.pdf" download target="_blank" rel="noopener">
+				Download the guide
+			</Button>,
+		);
+		const link = screen.getByRole('link', { name: 'Download the guide' });
+		expect(link.hasAttribute('download')).toBe(true);
+		expect(link.getAttribute('target')).toBe('_blank');
+		expect(link.getAttribute('rel')).toBe('noopener');
+	});
+
+	it('merges a consumer className after the design system classes', () => {
+		render(<Button className="hero-cta">Go</Button>);
+		expect(screen.getByRole('button').className).toBe(
+			'px-btn px-btn--primary px-btn--md hero-cta',
+		);
+	});
+
+	it('forwards a ref to the rendered element', () => {
+		const buttonRef = createRef<HTMLButtonElement>();
+		const linkRef = createRef<HTMLAnchorElement>();
+		render(
+			<>
+				<Button ref={buttonRef}>Save</Button>
+				<Button ref={linkRef} href="/">
+					Home
+				</Button>
+			</>,
+		);
+		expect(buttonRef.current?.tagName).toBe('BUTTON');
+		expect(linkRef.current?.tagName).toBe('A');
+		buttonRef.current?.focus();
+		expect(document.activeElement).toBe(buttonRef.current);
+	});
+
+	it('still calls onClick on a button', () => {
+		const onClick = vi.fn();
+		render(<Button onClick={onClick}>Save</Button>);
+		fireEvent.click(screen.getByRole('button'));
+		expect(onClick).toHaveBeenCalledTimes(1);
 	});
 });
