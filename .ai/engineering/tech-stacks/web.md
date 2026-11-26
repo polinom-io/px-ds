@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.16.0. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.21.0. Managed centrally; don't edit it here. -->
 
 # Web: Astro, React, TypeScript and CSS
 
@@ -12,6 +12,7 @@ The default web stack is Astro + React islands + TypeScript + CSS with px-ds tok
 ## HTML and CSS
 - Colours, type, spacing and radii come from px-ds tokens (CSS variables), never hard-coded values.
 - Semantic HTML first; meet WCAG 2.2 AA (contrast, keyboard access, labels, focus states).
+- Browser support: Baseline widely available features are safe to use. A Baseline newly available or limited feature is allowed only behind feature detection (`@supports`, `in` checks) with graceful degradation. No polyfills; if core behaviour needs such a feature, redesign or write a small fallback instead.
 - No CSS framework or UI kit that duplicates px-ds; ask before adding one.
 - Customer-facing text in the customer's language (usually Spanish, Chile); dates as DD-MM-YYYY in that text.
 
