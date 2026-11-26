@@ -6,7 +6,15 @@ import {
 	screen,
 } from '@testing-library/react';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { Alert, Field, Modal, Progress, Tabs } from '../src/index.js';
+import {
+	Alert,
+	Field,
+	Modal,
+	Progress,
+	Switch,
+	Table,
+	Tabs,
+} from '../src/index.js';
 
 afterEach(cleanup);
 
@@ -45,6 +53,21 @@ describe('Tabs (WAI-ARIA tabs pattern)', () => {
 		fireEvent.keyDown(list, { key: 'Home' });
 		expect(selected()).toBe(0);
 		expect(document.activeElement).toBe(screen.getAllByRole('tab')[0]);
+	});
+
+	it('leaves other keys alone', () => {
+		render(<Tabs label="Example" tabs={tabs} />);
+		const list = screen.getByRole('tablist');
+		const handled = fireEvent.keyDown(list, { key: 'a' });
+		expect(handled).toBe(true);
+		expect(screen.getAllByRole('tab')[0]?.getAttribute('aria-selected')).toBe(
+			'true',
+		);
+	});
+
+	it('makes the visible panel focusable', () => {
+		render(<Tabs label="Example" tabs={tabs} />);
+		expect(screen.getByRole('tabpanel').tabIndex).toBe(0);
 	});
 
 	it('links each tab and panel both ways', () => {
@@ -140,5 +163,27 @@ describe('Modal', () => {
 		fireEvent.click(screen.getByLabelText('Close'));
 		expect(dialog.open).toBe(false);
 		expect(onClose).toHaveBeenCalledTimes(1);
+	});
+});
+
+describe('Table', () => {
+	it('wraps the table in a named, focusable region', () => {
+		render(
+			<Table caption="Prices" columns={['Item', 'CLP']} rows={[['A', 1000]]} />,
+		);
+		const region = screen.getByRole('region', { name: 'Prices' });
+		expect(region.tabIndex).toBe(0);
+		expect(region.querySelector('table')).not.toBeNull();
+	});
+});
+
+describe('Switch', () => {
+	it('exposes the switch role with the native checked state', () => {
+		render(<Switch label="Alerts" defaultChecked />);
+		const sw = screen.getByRole('switch', { name: 'Alerts' });
+		expect(sw.getAttribute('aria-checked')).toBeNull();
+		expect((sw as HTMLInputElement).checked).toBe(true);
+		fireEvent.click(sw);
+		expect((sw as HTMLInputElement).checked).toBe(false);
 	});
 });

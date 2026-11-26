@@ -21,6 +21,7 @@ export function Switch({
 		<label className="px-switch">
 			<input
 				type="checkbox"
+				// biome-ignore lint/a11y/useAriaPropsForRole: the native checked state exposes aria-checked; ARIA in HTML forbids aria-checked where checked applies.
 				role="switch"
 				className="px-switch__input"
 				name={name}

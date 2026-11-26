@@ -37,17 +37,23 @@ export function Tabs({ label, tabs, defaultIndex = 0 }: TabsProps) {
 		refs.current[n]?.focus();
 	};
 	const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
-		const keys: Record<string, () => void> = {
-			ArrowRight: () => go(active + 1),
-			ArrowLeft: () => go(active - 1),
-			Home: () => go(0),
-			End: () => go(tabs.length - 1),
-		};
-		const run = keys[e.key];
-		if (run) {
-			e.preventDefault();
-			run();
+		switch (e.key) {
+			case 'ArrowRight':
+				go(active + 1);
+				break;
+			case 'ArrowLeft':
+				go(active - 1);
+				break;
+			case 'Home':
+				go(0);
+				break;
+			case 'End':
+				go(tabs.length - 1);
+				break;
+			default:
+				return;
 		}
+		e.preventDefault();
 	};
 	return (
 		<div className="px-tabs">
@@ -83,6 +89,7 @@ export function Tabs({ label, tabs, defaultIndex = 0 }: TabsProps) {
 					id={`${base}-panel-${i}`}
 					aria-labelledby={`${base}-tab-${i}`}
 					hidden={i !== active}
+					// biome-ignore lint/a11y/noNoninteractiveTabindex: WAI-ARIA APG tabs pattern makes the panel focusable when it may have no focusable content.
 					tabIndex={0}
 					className="px-tabs__panel"
 				>
