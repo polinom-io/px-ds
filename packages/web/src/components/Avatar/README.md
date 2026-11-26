@@ -5,7 +5,7 @@ Avatar shows a person or team as initials. Spec: DSP-04, initials only.
 ```jsx
 import { Avatar } from '@polinom-io/px-ds-react';
 
-<Avatar initials="ME" name="Mario Espinoza" size="lg" />
+<Avatar initials="CT" name="Camila Torres" size="lg" />
 ```
 
 - **The consumer provides** 1–2 `initials`. Add `name` when the avatar stands alone, so it is announced. Leave it out when the name is printed next to it.
