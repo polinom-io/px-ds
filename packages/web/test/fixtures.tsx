@@ -24,7 +24,7 @@ export const fixtures: Record<string, ReactElement> = {
 		</Alert>
 	),
 	Avatar: (
-		<Avatar initials="ME" name="Mario Espinoza" tone="secondary" size="lg" />
+		<Avatar initials="CT" name="Camila Torres" tone="secondary" size="lg" />
 	),
 	Badge: (
 		<Badge tone="tertiary" variant="solid">

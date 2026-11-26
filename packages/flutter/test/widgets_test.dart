@@ -87,8 +87,8 @@ void main() {
     testWidgets('reports typing', (tester) async {
       String? value;
       await tester.pumpWidget(themed(PxDsTextField(label: 'Name', onChanged: (v) => value = v)));
-      await tester.enterText(find.byType(TextField), 'Mario');
-      expect(value, 'Mario');
+      await tester.enterText(find.byType(TextField), 'Camila');
+      expect(value, 'Camila');
     });
   });
 
