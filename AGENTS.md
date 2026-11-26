@@ -4,12 +4,13 @@
 Polinom.io Design System: one set of design tokens for two brands (Polinom.io and TreatMint), light and dark, built into platform packages. See README.md for the full guide.
 
 ## Shared context
-Polinom.io rules are synced into `.ai/` from px-context; edit them there. If your harness has not already loaded them, read these files before any task:
-- `.ai/global.md`
-- `.ai/company-public.md`
-- `.ai/engineering/engineering.md`
+Polinom.io rules are synced into `.ai/` from px-context; edit them there. CLAUDE.md imports `.ai/global.md` and `.ai/engineering/engineering.md`. If your harness has not loaded them, read them before any task. Read the other `.ai/` files when their trigger applies:
+- `.ai/project-overview.md` (repo-owned): before planning, scoping or explaining work in this repo.
+- `.ai/business-rules.md` (repo-owned): before changing tokens, components, the token build or contrast pairs.
+- `.ai/engineering/tech-stacks/tech-stacks.md`, then `node-typescript.md`, `web.md` and `flutter.md`: before writing or reviewing code.
+- `.ai/company-public.md`: before describing Polinom.io publicly.
 
-<!-- The .ai/ files are synced from polinom-io/px-context. Edit them there, not here. -->
+<!-- Synced .ai/ files come from polinom-io/px-context; edit them there. project-overview.md and business-rules.md belong to this repo. -->
 
 ## Layout
 - `tokens/` — the only place tokens are edited (`tokens.json`, `motion.tokens.json`, `contrast-pairs.json`)
