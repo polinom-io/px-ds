@@ -3,12 +3,15 @@
 	"extends": ["@polinom-io/biome-config/biome"],
 	"files": {
 		"includes": [
-			"**",
 			"!**/.ai",
 			"!**/CHANGELOG.md",
 			"!**/.release-please-manifest.json",
 			"!packages/web/src/tokens/tokens.css",
-			"!packages/flutter"
+			"!packages/flutter",
+			"!**/*.md",
+			"!**/*.yml",
+			"!**/*.yaml",
+			"!assets"
 		]
 	}
 }
