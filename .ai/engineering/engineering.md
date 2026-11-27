@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.25.0. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.25.1. Managed centrally; don't edit it here. -->
 
 # Engineering standards
 
@@ -12,7 +12,7 @@
     - project-overview.md (repo-owned, not synced: what the product does, users, architecture)
     - business-rules.md (repo-owned, not synced: domain rules the code must keep)
 
-- `.gitignore` = the template's generic part + one block per declared `stack-*` topic, pasted from the template's `gitignore/<stack>.gitignore` above the secrets block, which stays last. No `!` lines except `!*.example` after the secrets header. Existing repos add their block when next touched.
+- `.gitignore` = the template's generic part + one block per declared `stack-*` topic, pasted from the template's `gitignore/<stack>.gitignore` above the secrets block, which stays last. No `!` lines, except in the secrets block a re-include ending in `.example`, placed right after the pattern it overrides (`.env.*` then `!.env.example`; `*.tfvars` then `!*.tfvars.example`). Never one `!*.example` at the end: patterns added later would win. Existing repos add their block when next touched.
 
 - Load `.ai/` context lazily. CLAUDE.md @-imports only `.ai/global.md`, `.ai/engineering/engineering.md` (commit, signing and branch rules apply to almost every session) and, in private repos, `.ai/data-and-security.md`. AGENTS.md lists the other `.ai/` files, each with a "read when" trigger, and you read a file when its trigger applies:
   - `project-overview.md`: before planning, scoping or explaining work in this repo.

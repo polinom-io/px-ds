@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/polinom-io/px-ds/compare/v0.3.0...v0.4.0) (2026-11-27)
+
+
+### Features
+
+* **tokens:** add a metric-matched fallback for the web font ([#44](https://github.com/polinom-io/px-ds/issues/44)) ([80f7c63](https://github.com/polinom-io/px-ds/commit/80f7c63e1234583dd725df00a7b7a3bc45fd00f8))
+
 ## [0.3.0](https://github.com/polinom-io/px-ds/compare/v0.2.2...v0.3.0) (2026-11-26)
 
 
