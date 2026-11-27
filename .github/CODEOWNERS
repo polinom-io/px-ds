@@ -1,33 +1,33 @@
 # Code owners (spec §10). The last matching pattern wins, so broad rules come first.
 #
-# Today one person owns everything. When teams exist, replace @mvrioe per line:
+# Today one owner approves everything (mvrioe writes, a-polinom-io approves). When teams exist, replace @a-polinom-io per line:
 # a core team for tokens, tools, assets, web and decisions; the mobile team plus
 # core for Flutter; the mobile team for iOS and Android. A team must have write
 # access to this repo before GitHub accepts it here.
 
 # Fallback: anything not listed below
-*                         @mvrioe
+*                         @a-polinom-io
 
 # Token sources, build tools and shared assets: every change
-/tokens/                  @mvrioe
-/tools/                   @mvrioe
-/assets/                  @mvrioe
+/tokens/                  @a-polinom-io
+/tools/                   @a-polinom-io
+/assets/                  @a-polinom-io
 
 # Web package and its playground
-/packages/web/            @mvrioe
-/apps/astro-playground/   @mvrioe
+/packages/web/            @a-polinom-io
+/apps/astro-playground/   @a-polinom-io
 
 # Flutter package and its gallery: mobile team for API changes, core for specs and accessibility
-/packages/flutter/        @mvrioe
-/apps/flutter-gallery/    @mvrioe
+/packages/flutter/        @a-polinom-io
+/apps/flutter-gallery/    @a-polinom-io
 
 # Phase 2 native packages
-/packages/ios/            @mvrioe
-/packages/android/        @mvrioe
-/Package.swift            @mvrioe
+/packages/ios/            @a-polinom-io
+/packages/android/        @a-polinom-io
+/Package.swift            @a-polinom-io
 
 # Repo settings, CI and release
-/.github/                 @mvrioe
+/.github/                 @a-polinom-io
 
 # Decision records
-/docs/decisions/          @mvrioe
+/docs/decisions/          @a-polinom-io
