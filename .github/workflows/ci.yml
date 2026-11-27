@@ -41,6 +41,10 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
+      # Unit tests for the token tools (same as `pnpm test`; pnpm isn't installed in this job).
+      - name: Token tool tests
+        run: node --test tools/*.test.mjs
+
   web:
     name: Web package (typecheck, test, build)
     runs-on: ubuntu-latest
