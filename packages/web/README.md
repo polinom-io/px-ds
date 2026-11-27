@@ -55,7 +55,7 @@ To load only some styles, import `tokens.css`, then `@polinom-io/px-ds-react/<Na
 
 `tokens.css` declares the fonts with `font-display: swap`: text shows at once in a fallback font and switches when the web font arrives. Browsers download only the faces a page uses, so most pages load just Atkinson Hyperlegible Next regular (about 48 KB).
 
-1. **No layout shift:** the font stacks include "Atkinson Hyperlegible Next Fallback", a local Arial scaled with `size-adjust` and `ascent-`, `descent-` and `line-gap-override`, so the swap keeps text size and line positions. The values are computed by `tools/font-fallback.mjs` from capsize metrics, and the token build fails if the font files stop matching them. Hack needs no fallback: Menlo, next in the monospace stack, has nearly the same metrics.
+1. **No layout shift:** the font stacks include "Atkinson Hyperlegible Next Fallback", a local Arial scaled with `size-adjust` and `ascent-`, `descent-` and `line-gap-override`, so the swap keeps text size and line positions. The values are computed by `tools/font-fallback.mjs` from capsize metrics, and the token build fails if the font files stop matching them. Hack needs no fallback: Menlo, next in the monospace stack, has nearly the same metrics. A second fallback, "Atkinson Hyperlegible Next Fallback Roboto", does the same with Roboto for Android and Linux, which have no Arial. The fallback faces have no weight or style descriptors, so bold and italic are synthesized from the regular fallback during the brief swap period.
 2. **Preload the regular face** in the page head, so the browser fetches it with the HTML instead of after the CSS. In Astro (Vite), import the file URL and preload that URL; it is the same file `tokens.css` points to:
 
 ```astro

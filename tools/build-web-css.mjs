@@ -135,7 +135,10 @@ export function buildWebCss(T, M, fontBase = 'fonts/') {
 		claim(`font-${k}`, 'type.families');
 		plain.push([
 			`font-${k}`,
-			fallbacks.reduce((stack, f) => withFallback(stack, f.for, f.family), v),
+			fallbacks.reduce(
+				(stack, f) => withFallback(stack, f.after ?? f.for, f.family),
+				v,
+			),
 		]);
 	}
 	for (const g of ty.groups) {
