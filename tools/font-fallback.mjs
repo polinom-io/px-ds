@@ -21,6 +21,13 @@ export const CAPSIZE_METRICS = {
 		lineGap: 67,
 		xWidthAvg: 913,
 	},
+	roboto: {
+		unitsPerEm: 2048,
+		ascent: 1900,
+		descent: -500,
+		lineGap: 0,
+		xWidthAvg: 911,
+	},
 	atkinsonHyperlegibleNext: {
 		unitsPerEm: 1000,
 		ascent: 984,

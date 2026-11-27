@@ -43,6 +43,18 @@ describe('fallbackOverrides', () => {
 		assert.equal(o.descentOverride, '31.73%');
 		assert.equal(o.lineGapOverride, '0%');
 	});
+
+	it('scales Atkinson Hyperlegible Next onto Roboto (Android and Linux)', () => {
+		const o = fallbackOverrides(
+			CAPSIZE_METRICS.atkinsonHyperlegibleNext,
+			CAPSIZE_METRICS.roboto,
+		);
+		// (444 / 1000) / (911 / 2048) = 0.99815
+		assert.equal(o.sizeAdjust, '99.81%');
+		assert.equal(o.ascentOverride, '98.58%');
+		assert.equal(o.descentOverride, '31.66%');
+		assert.equal(o.lineGapOverride, '0%');
+	});
 });
 
 describe('readTtfMetrics', () => {
@@ -88,6 +100,14 @@ describe('withFallback', () => {
 		assert.equal(
 			withFallback('"Brand", system-ui, sans-serif', 'Brand', 'Brand Fallback'),
 			'"Brand", "Brand Fallback", system-ui, sans-serif',
+		);
+	});
+
+	it('chains a second fallback after the first', () => {
+		const once = withFallback('"Brand", sans-serif', 'Brand', 'Brand Fallback');
+		assert.equal(
+			withFallback(once, 'Brand Fallback', 'Brand Fallback Roboto'),
+			'"Brand", "Brand Fallback", "Brand Fallback Roboto", sans-serif',
 		);
 	});
 
