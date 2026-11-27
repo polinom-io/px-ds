@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/polinom-io/px-ds/compare/v0.4.0...v0.5.0) (2026-11-27)
+
+
+### Features
+
+* **tokens:** add a roboto fallback for android and linux ([#48](https://github.com/polinom-io/px-ds/issues/48)) ([a7a5fd3](https://github.com/polinom-io/px-ds/commit/a7a5fd38ab940e548a36c579f64849d59cbe2e37))
+
 ## [0.4.0](https://github.com/polinom-io/px-ds/compare/v0.3.0...v0.4.0) (2026-11-27)
 
 
