@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.25.1. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.27.0. Managed centrally; don't edit it here. -->
 
 # Tech stacks
 
@@ -27,7 +27,10 @@ A stack is a set of layers. **Complementary** layers are used together; a **one-
 | Web | Styling | CSS with px-ds tokens | Complementary | CSS frameworks or UI kits that duplicate px-ds |
 | Web | Analytics | Google Analytics 4 | Complementary | Other trackers without review |
 | Mobile | Cross-platform app | Flutter / Dart | One-of | Other cross-platform frameworks |
+| Mobile | State management | BLoC (`flutter_bloc`) | One-of | Riverpod, Provider, GetX, MobX |
+| Mobile | Local database (L4/L5) | Drift + SQLCipher | Default | Unencrypted SQLite for user data |
 | Mobile | Analytics | Firebase Analytics | Complementary | Other trackers without review |
+| Mobile | Crash reporting | Firebase Crashlytics | Complementary | Other crash reporters without review |
 | Mobile | Native iOS | Swift + Swift Package Manager | Reference architecture only | CocoaPods, Carthage |
 | Mobile | Native iOS UI | SwiftUI | One-of | UIKit in new screens (only to wrap what SwiftUI lacks) |
 | Mobile | Native Android | Kotlin + Gradle (Kotlin DSL) | Only where Flutter can't do the job | Java in new code, Groovy build scripts |
@@ -35,7 +38,7 @@ A stack is a set of layers. **Complementary** layers are used together; a **one-
 | Backend | Compute | Serverless on AWS (Node.js + TypeScript) | One-of | — |
 | All | Telemetry | OpenTelemetry (traces, metrics, logs; OTLP export) | Complementary | Vendor SDKs as the primary instrumentation |
 
-A typical web app or site is Astro + React islands + TypeScript + px-ds tokens + Google Analytics 4 + OpenTelemetry. Changing a one-of choice, or adding a layer, needs a PR to these files first.
+A typical web app or site is Astro + React islands + TypeScript + px-ds tokens + Google Analytics 4 + OpenTelemetry. A mobile app is Flutter + BLoC + Drift/SQLCipher + px-ds tokens + Firebase Analytics and Crashlytics. Changing a one-of choice, or adding a layer, needs a PR to these files first.
 
 ## Repo roles
 
