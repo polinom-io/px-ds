@@ -51,6 +51,25 @@ Props passed from an `.astro` file must be serializable (strings, numbers, array
 
 To load only some styles, import `tokens.css`, then `@polinom-io/px-ds-react/<Name>.css` per component instead of `styles.css`. Base styles (focus ring, icon button, reduced motion) are in `styles.css` only.
 
+## Fonts
+
+`tokens.css` declares the fonts with `font-display: swap`: text shows at once in a fallback font and switches when the web font arrives. Browsers download only the faces a page uses, so most pages load just Atkinson Hyperlegible Next regular (about 48 KB).
+
+1. **No layout shift:** the font stacks include "Atkinson Hyperlegible Next Fallback", a local Arial scaled with `size-adjust` and `ascent-`, `descent-` and `line-gap-override`, so the swap keeps text size and line positions. The values are computed by `tools/font-fallback.mjs` from capsize metrics, and the token build fails if the font files stop matching them. Hack needs no fallback: Menlo, next in the monospace stack, has nearly the same metrics.
+2. **Preload the regular face** in the page head, so the browser fetches it with the HTML instead of after the CSS. In Astro (Vite), import the file URL and preload that URL; it is the same file `tokens.css` points to:
+
+```astro
+---
+// src/layouts/Base.astro
+import atkinson from '@polinom-io/px-ds-react/fonts/AtkinsonHyperlegibleNext-Var.woff2?url';
+---
+<head>
+  <link rel="preload" href={atkinson} as="font" type="font/woff2" crossorigin />
+</head>
+```
+
+Keep `crossorigin`: fonts are fetched in CORS mode, and without it the browser downloads the file twice. Preload only the regular face; preloading faces a page doesn't use wastes bandwidth.
+
 ## Components
 
 | Component | Spec | In Astro |
