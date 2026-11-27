@@ -20,6 +20,11 @@ import { buildDart } from './build-dart.mjs';
 import { buildWebCss } from './build-web-css.mjs';
 import { contrastCheck } from './contrast-check.mjs';
 import { band, cvdCheck } from './cvd-check.mjs';
+import {
+	assertMatchesRecorded,
+	CAPSIZE_METRICS,
+	readTtfMetrics,
+} from './font-fallback.mjs';
 import { buildDartIcons, parseIcons } from './icons.mjs';
 import { verifyDart } from './verify-dart.mjs';
 import { verifyWebCss } from './verify-web-css.mjs';
@@ -126,6 +131,18 @@ step('CVD report (informational, §6.1)', () => {
 		(r) => band(Math.min(r.protan, r.deutan)) === 'CONFUSABLE',
 	);
 	return `${rows.length} pairs, ${low.length} under 10 (allowed: labels carry meaning)${low.length ? `\n     ${low.map((r) => `${r.brand} ${r.mode} ${r.group} ${r.pair}`).join('\n     ')}` : ''}`;
+});
+step('font fallback metrics (capsize)', () => {
+	// The fallback overrides use recorded capsize metrics; fail if our font files no longer match them.
+	const fallbacks = T.type.fallbacks ?? [];
+	for (const f of fallbacks)
+		for (const file of f.checkFiles)
+			assertMatchesRecorded(
+				readTtfMetrics(readFileSync(join(paths.fonts, file))),
+				CAPSIZE_METRICS[f.metrics],
+				file,
+			);
+	return `${fallbacks.length} fallback ${fallbacks.length === 1 ? 'family' : 'families'}; font files match the recorded metrics`;
 });
 step('Flutter fonts (ttf + licences)', () => {
 	// Flutter cannot load woff2, so packages/flutter bundles the ttf files from assets/fonts.

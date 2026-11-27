@@ -50,8 +50,8 @@
   --motion-duration-slow: 280ms;
   --motion-easing-enter: cubic-bezier(0.2,0,0,1);
   --motion-easing-exit: cubic-bezier(0.4,0,1,1);
-  --font-brand: "Atkinson Hyperlegible Next", system-ui, sans-serif;
-  --font-body: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  --font-brand: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible Next Fallback", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible Next Fallback", system-ui, sans-serif;
   --font-mono: Hack, ui-monospace, Menlo, Consolas, monospace;
   --text-display-lg: 700 4rem/4.25rem var(--font-brand);
   --text-display-lg-tracking: -0.02em;
@@ -447,4 +447,13 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible Next Fallback";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 99.6%;
+  ascent-override: 98.8%;
+  descent-override: 31.73%;
+  line-gap-override: 0%;
 }

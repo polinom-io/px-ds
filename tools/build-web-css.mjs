@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 // Web CSS export (spec §2.2, v0.35). No dependencies.
 //
 //   node build-web-css.mjs tokens.json motion.tokens.json out/tokens.css [font-url-base]
@@ -9,8 +11,12 @@
 //   @media (prefers-color-scheme: dark) { [data-theme="px"]:not([data-mode]) { same dark values } }
 // Fails (throws) on: a colour/shadow token missing a theme value, an alias to a missing token or a
 // cycle, a name that is not lowercase-hyphenated, or two tokens with one name.
-import { readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import {
+	CAPSIZE_METRICS,
+	fallbackFace,
+	fallbackOverrides,
+	withFallback,
+} from './font-fallback.mjs';
 
 const NAME = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const THEMED = ['color', 'shadow'];
@@ -124,9 +130,13 @@ export function buildWebCss(T, M, fontBase = 'fonts/') {
 		plain.push([k, v]);
 	}
 	const ty = T.type;
+	const fallbacks = ty.fallbacks ?? [];
 	for (const [k, v] of Object.entries(ty.families)) {
 		claim(`font-${k}`, 'type.families');
-		plain.push([`font-${k}`, v]);
+		plain.push([
+			`font-${k}`,
+			fallbacks.reduce((stack, f) => withFallback(stack, f.for, f.family), v),
+		]);
 	}
 	for (const g of ty.groups) {
 		for (const s of g.styles) {
@@ -189,6 +199,21 @@ export function buildWebCss(T, M, fontBase = 'fonts/') {
 			: f.file;
 		out.push(
 			`@font-face {\n  font-family: "${f.family}";\n  src: url("${fontBase}${file}") format("${file.slice(file.lastIndexOf('.') + 1)}");\n  font-weight: ${f.weight};\n  font-style: ${f.style ?? 'normal'};\n  font-display: swap;\n}\n`,
+		);
+	}
+	for (const f of fallbacks) {
+		const font = CAPSIZE_METRICS[f.metrics];
+		const local = CAPSIZE_METRICS[f.localMetrics];
+		if (!font || !local)
+			throw new Error(
+				`type.fallbacks "${f.family}": no capsize metrics for "${f.metrics}" or "${f.localMetrics}" in tools/font-fallback.mjs`,
+			);
+		out.push(
+			fallbackFace({
+				family: f.family,
+				local: f.local,
+				overrides: fallbackOverrides(font, local),
+			}),
 		);
 	}
 	return {
