@@ -1,4 +1,4 @@
-<!-- Polinom.io shared AI context v1.25.1. Managed centrally; don't edit it here. -->
+<!-- Polinom.io shared AI context v1.27.0. Managed centrally; don't edit it here. -->
 
 # Polinom.io — public company facts
 
